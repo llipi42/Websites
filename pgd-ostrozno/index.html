@@ -1,0 +1,1074 @@
+<title>PGD Ostrožno</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400..600&display=swap">
+
+<style>
+/* ============================================================
+   PGD OSTROŽNO — tokens
+   Light = pocinkana pločevina (galvanized steel paper)
+   Dark  = osajena jeklenka (sooted steel)
+   ============================================================ */
+:root{
+  /* fixed brand — identical in both temah */
+  --red:#ce1f1b;
+  --red-deep:#8e120f;
+  --ember:#ff6b2c;
+  --hivis:#f5b024;
+
+  /* hero is a committed dark band in both themes */
+  --bay:#120e0c;
+  --bay-2:#1d1613;
+  --bay-line:rgba(255,255,255,.10);
+  --bay-ink:#f3efec;
+  --bay-mute:#9d938d;
+
+  /* theme-dependent */
+  --paper:#edeff1;
+  --paper-2:#e2e5e9;
+  --card:#f7f8f9;
+  --ink:#17120f;
+  --ink-2:#3d3733;
+  --mute:#565e69;
+  --line:rgba(23,18,15,.14);
+  --line-soft:rgba(23,18,15,.07);
+  --shadow:0 1px 2px rgba(23,18,15,.06),0 12px 34px -18px rgba(23,18,15,.35);
+  --shadow-lift:0 2px 4px rgba(23,18,15,.07),0 28px 60px -24px rgba(23,18,15,.45);
+  --accent-on-paper:#b81813;
+
+  /* type scale — 1.26 */
+  --t-xs:.72rem; --t-sm:.83rem; --t-base:1.0rem; --t-md:1.15rem;
+  --t-lg:1.45rem; --t-xl:1.9rem; --t-2xl:2.5rem; --t-3xl:3.3rem; --t-4xl:4.4rem;
+
+  --gutter:clamp(1.25rem,5vw,4.5rem);
+  --maxw:1240px;
+  --ease:cubic-bezier(.22,.85,.28,1);
+
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#131110;
+    --paper-2:#1b1817;
+    --card:#1c1917;
+    --ink:#f2eeeb;
+    --ink-2:#c8c0bb;
+    --mute:#8f8781;
+    --line:rgba(242,238,235,.15);
+    --line-soft:rgba(242,238,235,.08);
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 14px 36px -18px rgba(0,0,0,.8);
+    --shadow-lift:0 2px 6px rgba(0,0,0,.55),0 30px 64px -24px rgba(0,0,0,.9);
+    --accent-on-paper:#ff4a3d;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131110;
+  --paper-2:#1b1817;
+  --card:#1c1917;
+  --ink:#f2eeeb;
+  --ink-2:#c8c0bb;
+  --mute:#8f8781;
+  --line:rgba(242,238,235,.15);
+  --line-soft:rgba(242,238,235,.08);
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 14px 36px -18px rgba(0,0,0,.8);
+  --shadow-lift:0 2px 6px rgba(0,0,0,.55),0 30px 64px -24px rgba(0,0,0,.9);
+  --accent-on-paper:#ff4a3d;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Archivo","Helvetica Neue",Arial,sans-serif;
+  font-variation-settings:"wdth" 100;
+  font-size:var(--t-base);
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{margin:0;text-wrap:balance;font-variation-settings:"wdth" 118;letter-spacing:-.02em;line-height:1.02}
+p{margin:0}
+a{color:inherit}
+img,svg{max-width:100%}
+:focus-visible{outline:3px solid var(--hivis);outline-offset:3px;border-radius:2px}
+
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+
+/* stenciled mono label — equipment labelling vernacular */
+.stencil{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:var(--t-xs);
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--mute);
+  font-weight:500;
+}
+
+/* ============================================================
+   CHEVRON — rear-of-apparatus hi-vis striping, the page motif
+   ============================================================ */
+.chevrons{
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(115deg,
+    var(--red) 0 74px,
+    transparent 74px 148px);
+  opacity:.20;
+  background-size:200% 100%;
+}
+@media (prefers-reduced-motion:no-preference){
+  .chevrons{animation:slide 26s linear infinite}
+}
+@keyframes slide{to{background-position:-296px 0}}
+
+.rule{
+  height:6px;border:0;margin:0;
+  background:repeating-linear-gradient(115deg,
+    var(--red) 0 12px, transparent 12px 24px);
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.hdr{
+  position:sticky;top:0;z-index:60;
+  background:color-mix(in srgb,var(--bay) 82%,transparent);
+  backdrop-filter:blur(14px) saturate(1.3);
+  border-bottom:1px solid var(--bay-line);
+  transition:padding .35s var(--ease),background .35s var(--ease);
+}
+.hdr-in{display:flex;align-items:center;gap:1.5rem;padding-block:1.05rem;transition:padding-block .35s var(--ease)}
+.hdr.compact .hdr-in{padding-block:.55rem}
+
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;margin-right:auto}
+.brand svg{width:38px;height:38px;flex:none;transition:transform .5s var(--ease)}
+.brand:hover svg{transform:rotate(-6deg) scale(1.06)}
+.brand-t{display:flex;flex-direction:column;line-height:1.05;white-space:nowrap}
+.brand-t b{
+  font-size:1.02rem;font-weight:800;letter-spacing:.02em;
+  font-variation-settings:"wdth" 112;color:var(--bay-ink);
+}
+.brand-t span{font-family:"IBM Plex Mono",monospace;font-size:.63rem;letter-spacing:.2em;color:var(--bay-mute);text-transform:uppercase}
+
+.nav{display:flex;gap:.35rem;align-items:center}
+.nav a{
+  position:relative;text-decoration:none;color:var(--bay-mute);
+  font-size:var(--t-sm);font-weight:600;letter-spacing:.04em;
+  padding:.45rem .7rem;border-radius:3px;transition:color .25s var(--ease);
+}
+.nav a::after{
+  content:"";position:absolute;left:.7rem;right:.7rem;bottom:.22rem;height:2px;
+  background:var(--hivis);transform:scaleX(0);transform-origin:left;
+  transition:transform .34s var(--ease);
+}
+.nav a:hover,.nav a.on{color:var(--bay-ink)}
+.nav a:hover::after,.nav a.on::after{transform:scaleX(1)}
+
+.sos{
+  display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;
+  background:var(--red);color:#fff;font-weight:800;
+  font-size:var(--t-sm);letter-spacing:.06em;
+  padding:.6rem 1rem;border-radius:2px;
+  box-shadow:0 0 0 0 rgba(206,31,27,.55);
+  transition:transform .25s var(--ease),background .25s var(--ease);
+}
+.sos:hover{transform:translateY(-2px);background:#e0231e}
+@media (prefers-reduced-motion:no-preference){.sos{animation:pulse 3.4s ease-out infinite}}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(206,31,27,.5)}
+  60%,100%{box-shadow:0 0 0 16px rgba(206,31,27,0)}
+}
+.sos b{font-family:"IBM Plex Mono",monospace;font-size:1rem}
+
+.burger{display:none;background:none;border:1px solid var(--bay-line);border-radius:3px;padding:.5rem .6rem;cursor:pointer}
+.burger span{display:block;width:20px;height:2px;background:var(--bay-ink);margin:4px 0;transition:transform .3s var(--ease),opacity .3s}
+.hdr.open .burger span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hdr.open .burger span:nth-child(2){opacity:0}
+.hdr.open .burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+@media (max-width:900px){
+  .burger{display:block;order:3}
+  .nav{
+    position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;align-items:stretch;gap:0;
+    background:var(--bay);border-bottom:1px solid var(--bay-line);
+    padding:.5rem var(--gutter) 1.2rem;
+    clip-path:inset(0 0 100% 0);pointer-events:none;
+    transition:clip-path .45s var(--ease);
+  }
+  .hdr.open .nav{clip-path:inset(0 0 0 0);pointer-events:auto}
+  .nav a{padding:.8rem .2rem;border-bottom:1px solid var(--bay-line);font-size:var(--t-md)}
+  .sos{order:2}
+  .sos .sos-w{display:none}
+}
+
+@media (max-width:520px){
+  .hdr-in{gap:.7rem}
+  .brand svg{width:32px;height:32px}
+  .brand-t b{font-size:.9rem}
+  .brand-t span{font-size:.56rem;letter-spacing:.14em}
+  .sos{padding:.55rem .8rem}
+}
+@media (max-width:640px){
+  /* eyebrow flows as one sentence instead of stacking as flex rows */
+  .eyebrow{display:block;line-height:1.95;margin-bottom:1.2rem}
+  .eyebrow .dot{display:inline-block;vertical-align:middle;margin-right:.55rem}
+  .eyebrow .stencil{display:inline;font-size:.65rem;letter-spacing:.15em}
+}
+
+/* ============================================================
+   HERO — the apparatus bay
+   ============================================================ */
+.hero{position:relative;background:var(--bay);color:var(--bay-ink);overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-bg .chevrons{opacity:.13}
+.hero-bg::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(115% 85% at 12% 4%, rgba(255,107,44,.20), transparent 58%),
+    linear-gradient(180deg, rgba(18,14,12,.10) 0%, rgba(18,14,12,.86) 72%, var(--bay) 100%);
+}
+/* beacon — the rotating light bar wash */
+.beacon{position:absolute;width:150vmax;height:150vmax;left:50%;top:35%;translate:-50% -50%;z-index:0;pointer-events:none}
+.beacon i{
+  position:absolute;inset:0;border-radius:50%;mix-blend-mode:screen;
+  background:conic-gradient(from 0deg,
+    transparent 0deg 26deg, rgba(206,31,27,.30) 34deg, transparent 48deg 180deg,
+    transparent 206deg 214deg, rgba(206,31,27,.22) 222deg, transparent 236deg 360deg);
+  filter:blur(50px);opacity:.75;
+}
+.beacon i.b2{
+  background:conic-gradient(from 90deg,
+    transparent 0deg 20deg, rgba(245,176,36,.20) 28deg, transparent 42deg 360deg);
+  filter:blur(70px);opacity:.5;
+}
+@media (prefers-reduced-motion:no-preference){
+  .beacon i{animation:spin 14s linear infinite}
+  .beacon i.b2{animation:spin 22s linear infinite reverse}
+}
+@keyframes spin{to{rotate:360deg}}
+
+.hero-in{position:relative;z-index:2;padding-block:clamp(4.5rem,13vh,8rem) clamp(3rem,7vh,5rem)}
+.eyebrow{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;margin-bottom:1.6rem}
+.eyebrow .stencil{color:#bdb3ad}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--hivis);flex:none;box-shadow:0 0 0 4px rgba(245,176,36,.18)}
+@media (prefers-reduced-motion:no-preference){.dot{animation:blink 2.2s ease-in-out infinite}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+.h1{
+  font-size:clamp(2.7rem,9.2vw,7.2rem);
+  font-weight:900;font-variation-settings:"wdth" 124;
+  letter-spacing:-.045em;line-height:.90;text-transform:uppercase;
+  margin:0 0 1.6rem;max-width:15ch;
+}
+.h1 .ln{display:block;overflow:hidden}
+.h1 .ln > i{display:block;font-style:normal}
+.h1 em{font-style:normal;color:var(--red);
+  -webkit-text-stroke:0;
+  background:linear-gradient(100deg,var(--red) 10%,var(--ember) 90%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-lede{
+  max-width:56ch;font-size:clamp(1.02rem,1.9vw,1.28rem);
+  color:#d6cec9;line-height:1.66;margin-bottom:2.4rem;
+}
+.hero-cta{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
+
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;
+  font-weight:700;font-size:var(--t-sm);letter-spacing:.07em;text-transform:uppercase;
+  padding:.95rem 1.5rem;border-radius:2px;border:1px solid transparent;
+  transition:transform .28s var(--ease),background .28s var(--ease),border-color .28s var(--ease),color .28s var(--ease);
+  cursor:pointer;font-family:inherit;
+}
+.btn:hover{transform:translateY(-3px)}
+.btn-fill{background:var(--red);color:#fff}
+.btn-fill:hover{background:#e0231e}
+.btn-ghost{border-color:rgba(255,255,255,.28);color:var(--bay-ink)}
+.btn-ghost:hover{border-color:var(--hivis);color:var(--hivis)}
+.btn-dark{background:var(--ink);color:var(--paper)}
+.btn-dark:hover{background:var(--red);color:#fff}
+.btn svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+
+/* dispatch strip */
+.strip{position:relative;z-index:2;border-top:1px solid var(--bay-line);background:rgba(0,0,0,.28)}
+.strip-in{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bay-line)}
+.stat{background:var(--bay);padding:1.6rem clamp(1rem,2.4vw,2rem)}
+.stat b{
+  display:block;font-size:clamp(1.9rem,4.4vw,3rem);font-weight:900;
+  font-variation-settings:"wdth" 120;line-height:1;color:var(--bay-ink);
+  font-variant-numeric:tabular-nums;letter-spacing:-.03em;
+}
+.stat b i{font-style:normal;color:var(--red)}
+.stat > span{display:block;margin-top:.5rem;font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bay-mute)}
+@media (max-width:760px){.strip-in{grid-template-columns:repeat(2,1fr)}}
+
+/* ============================================================
+   SECTIONS — asymmetric grid: content left, stenciled rail right
+   ============================================================ */
+.sec{padding-block:clamp(4.5rem,10vw,8rem);position:relative}
+section[id],main{scroll-margin-top:88px}
+.sec-alt{background:var(--paper-2)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:clamp(1.5rem,4vw,4rem);align-items:end;margin-bottom:clamp(2.5rem,5vw,4rem)}
+.sec-head .kicker{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+.kicker .bar{width:34px;height:3px;background:var(--red);flex:none}
+.h2{font-size:clamp(1.9rem,5vw,3.4rem);font-weight:900;font-variation-settings:"wdth" 122;text-transform:uppercase;letter-spacing:-.035em;max-width:18ch}
+.sec-head p{color:var(--mute);font-size:var(--t-sm);line-height:1.7;border-left:1px solid var(--line);padding-left:1.2rem}
+@media (max-width:860px){
+  .sec-head{grid-template-columns:1fr;align-items:start}
+  .sec-head p{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:1rem}
+}
+
+/* about */
+.about{display:grid;grid-template-columns:1.35fr .9fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
+@media (max-width:900px){.about{grid-template-columns:1fr}}
+.lede{
+  font-family:"Source Serif 4",Georgia,serif;font-style:italic;
+  font-size:clamp(1.3rem,2.7vw,1.85rem);line-height:1.42;letter-spacing:-.01em;
+  color:var(--ink);margin-bottom:1.8rem;text-wrap:pretty;
+}
+.lede b{font-style:normal;font-family:"Archivo",sans-serif;font-weight:800;font-variation-settings:"wdth" 112}
+.body-col p{color:var(--ink-2);margin-bottom:1.1rem;max-width:64ch}
+.rail{border-top:3px solid var(--ink);padding-top:.5rem;display:flex;flex-direction:column}
+.rail dl{display:grid;grid-template-columns:1fr auto;gap:.4rem 1rem;margin:0;padding:.85rem .2rem;align-items:baseline;border-bottom:1px solid var(--line-soft)}
+.rail dl:last-child{border-bottom:0}
+.rail dt{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.rail dd{margin:0;font-weight:700;font-size:var(--t-sm);text-align:right;font-variant-numeric:tabular-nums}
+
+/* cards — activities */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1px;background:var(--line)}
+.card{
+  background:var(--card);padding:clamp(1.6rem,2.6vw,2.2rem);
+  position:relative;overflow:hidden;
+  transition:background .35s var(--ease),transform .45s var(--ease);
+}
+.card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--red),var(--ember));
+  transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);
+}
+.card:hover::before{transform:scaleX(1)}
+.card:hover{transform:translateY(-4px);z-index:2;box-shadow:var(--shadow-lift)}
+.card .ic{width:34px;height:34px;color:var(--accent-on-paper);margin-bottom:1.1rem}
+.card h3{font-size:var(--t-md);font-weight:800;font-variation-settings:"wdth" 110;margin-bottom:.6rem;letter-spacing:-.01em}
+.card p{color:var(--mute);font-size:var(--t-sm);line-height:1.68}
+.card .tag{position:absolute;top:1.1rem;right:1.2rem;font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.16em;color:var(--line);text-transform:uppercase}
+
+/* fleet */
+.fleet{display:flex;flex-direction:column;gap:1px;background:var(--line);border-block:1px solid var(--line)}
+.veh{
+  background:var(--paper);display:grid;
+  grid-template-columns:150px minmax(0,1fr) 210px;
+  gap:clamp(1rem,3vw,2.5rem);align-items:center;
+  padding:clamp(1.3rem,2.6vw,2rem) 0;position:relative;
+  transition:background .4s var(--ease),padding-inline .4s var(--ease);
+}
+.sec-alt .veh{background:var(--paper-2)}
+.veh:hover{background:var(--card);padding-inline:1.25rem}
+.veh-code{
+  font-family:"IBM Plex Mono",monospace;font-weight:600;
+  font-size:clamp(1.1rem,2.4vw,1.5rem);letter-spacing:-.02em;color:var(--accent-on-paper);
+  display:flex;align-items:baseline;gap:.6rem;
+}
+.veh-code s{text-decoration:none;font-size:.62rem;letter-spacing:.14em;color:var(--mute)}
+.veh h3{font-size:var(--t-md);font-weight:800;font-variation-settings:"wdth" 108;margin-bottom:.35rem}
+.veh p{color:var(--mute);font-size:var(--t-sm);max-width:60ch}
+.veh-meta{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:flex-end}
+.chip{
+  font-family:"IBM Plex Mono",monospace;font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--line);padding:.3rem .55rem;border-radius:2px;color:var(--mute);white-space:nowrap;
+}
+.chip-hot{border-color:var(--red);color:var(--accent-on-paper);font-weight:600}
+@media (max-width:880px){
+  .veh{grid-template-columns:1fr;gap:.8rem}
+  .veh-meta{justify-content:flex-start}
+}
+
+/* timeline — the hose line filling */
+.tl{position:relative;padding-left:clamp(2.2rem,5vw,4rem);margin-top:1rem}
+.tl::before{content:"";position:absolute;left:clamp(.55rem,1.4vw,1.1rem);top:.4rem;bottom:.4rem;width:2px;background:var(--line)}
+.tl::after{
+  content:"";position:absolute;left:clamp(.55rem,1.4vw,1.1rem);top:.4rem;width:2px;
+  height:calc(var(--fill,0) * (100% - .8rem));
+  background:linear-gradient(180deg,var(--red),var(--ember));
+  transition:height .18s linear;
+}
+.ev{position:relative;padding-bottom:clamp(2rem,4vw,3rem)}
+.ev:last-child{padding-bottom:0}
+.ev::before{
+  content:"";position:absolute;left:calc(clamp(.55rem,1.4vw,1.1rem) - clamp(2.2rem,5vw,4rem) - 4px);
+  top:.55rem;width:10px;height:10px;border-radius:50%;
+  background:var(--paper);border:2px solid var(--line);transition:border-color .4s var(--ease),background .4s var(--ease);
+}
+.sec-alt .ev::before{background:var(--paper-2)}
+.ev.lit::before{border-color:var(--red);background:var(--red);box-shadow:0 0 0 5px rgba(206,31,27,.14)}
+.ev .yr{
+  font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:var(--t-sm);
+  letter-spacing:.1em;color:var(--accent-on-paper);display:block;margin-bottom:.35rem;
+}
+.ev h3{font-size:var(--t-lg);font-weight:800;font-variation-settings:"wdth" 112;margin-bottom:.5rem}
+.ev p{color:var(--ink-2);max-width:68ch}
+@media (min-width:960px){
+  .ev{display:grid;grid-template-columns:150px minmax(0,1fr);column-gap:clamp(2rem,4vw,3.5rem)}
+  .ev .yr{grid-column:1;grid-row:1 / span 2;text-align:right;margin:0;padding-top:.5rem;font-size:var(--t-base)}
+  .ev h3{grid-column:2;grid-row:1}
+  .ev p{grid-column:2;grid-row:2}
+}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--line)}
+.person{background:var(--card);padding:clamp(1.5rem,2.6vw,2rem);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.person:hover{transform:translateY(-4px);z-index:2;box-shadow:var(--shadow-lift)}
+.avatar{
+  width:64px;height:64px;border-radius:50%;display:grid;place-items:center;
+  font-weight:900;font-size:1.25rem;font-variation-settings:"wdth" 100;letter-spacing:.02em;
+  color:#fff;background:linear-gradient(140deg,var(--red-deep),var(--red) 55%,var(--ember));
+  margin-bottom:1.1rem;box-shadow:0 8px 22px -10px rgba(206,31,27,.8);
+}
+.person .role{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-bottom:.3rem}
+.person h3{font-size:var(--t-md);font-weight:800;font-variation-settings:"wdth" 108;margin-bottom:.7rem}
+.person a{
+  font-family:"IBM Plex Mono",monospace;font-size:var(--t-sm);text-decoration:none;
+  color:var(--accent-on-paper);border-bottom:1px solid transparent;transition:border-color .3s
+}
+.person a:hover{border-color:var(--accent-on-paper)}
+
+/* join band */
+.join{position:relative;background:var(--bay);color:var(--bay-ink);overflow:hidden;isolation:isolate}
+.join .chevrons{opacity:.11}
+.join-in{position:relative;z-index:2;padding-block:clamp(3.5rem,8vw,6rem);display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+@media (max-width:880px){.join-in{grid-template-columns:1fr}}
+.join h2{font-size:clamp(1.8rem,4.6vw,3.1rem);font-weight:900;font-variation-settings:"wdth" 122;text-transform:uppercase;letter-spacing:-.035em;margin-bottom:1.1rem}
+.join p{color:#cfc7c2;max-width:52ch;margin-bottom:1.8rem}
+.join-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px;background:var(--bay-line);border:1px solid var(--bay-line)}
+.join-list li{background:var(--bay-2);padding:.95rem 1.15rem;display:flex;gap:.8rem;align-items:center;font-size:var(--t-sm);color:#ded6d1}
+.join-list b{font-family:"IBM Plex Mono",monospace;color:var(--hivis);font-size:.72rem;letter-spacing:.1em}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media (max-width:880px){.contact{grid-template-columns:1fr}}
+.cbox{background:var(--paper);padding:clamp(1.6rem,3vw,2.4rem)}
+.sec-alt .cbox{background:var(--paper-2)}
+.crow{display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line-soft);align-items:flex-start}
+.crow:last-child{border-bottom:0}
+.crow svg{width:20px;height:20px;color:var(--accent-on-paper);flex:none;margin-top:.25rem}
+.crow .k{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);display:block;margin-bottom:.15rem}
+.crow a,.crow span.v{font-weight:700;text-decoration:none;font-size:var(--t-md)}
+.crow a{border-bottom:1px solid transparent;transition:border-color .3s,color .3s}
+.crow a:hover{color:var(--accent-on-paper);border-color:var(--accent-on-paper)}
+
+.emergency{
+  background:var(--red);color:#fff;padding:clamp(1.6rem,3vw,2.4rem);
+  display:flex;flex-direction:column;justify-content:center;gap:.7rem;position:relative;overflow:hidden;
+}
+.emergency .num{font-family:"IBM Plex Mono",monospace;font-size:clamp(3rem,9vw,5.2rem);font-weight:600;line-height:.9;letter-spacing:-.04em}
+.emergency p{font-size:var(--t-sm);color:rgba(255,255,255,.88);max-width:36ch}
+.emergency .stencil{color:rgba(255,255,255,.72)}
+
+/* footer */
+.ftr{background:var(--bay);color:var(--bay-mute);padding-block:clamp(2.5rem,5vw,4rem) 2rem;font-size:var(--t-sm)}
+.ftr-in{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--bay-line)}
+@media (max-width:760px){.ftr-in{grid-template-columns:1fr;gap:1.8rem}}
+.ftr h4{color:var(--bay-ink);font-size:var(--t-sm);font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;font-variation-settings:"wdth" 108}
+.ftr ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.55rem}
+.ftr a{text-decoration:none;transition:color .25s}
+.ftr a:hover{color:var(--hivis)}
+.ftr-btm{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-top:1.5rem;font-size:var(--t-xs);font-family:"IBM Plex Mono",monospace;letter-spacing:.08em}
+
+/* theme toggle */
+.tt{background:none;border:1px solid var(--bay-line);color:var(--bay-mute);border-radius:3px;padding:.5rem;cursor:pointer;display:grid;place-items:center;transition:color .25s,border-color .25s}
+.tt:hover{color:var(--hivis);border-color:var(--hivis)}
+.tt svg{width:17px;height:17px}
+.tt .moon{display:none}
+:root[data-theme="dark"] .tt .moon{display:block}
+:root[data-theme="dark"] .tt .sun{display:none}
+
+/* scroll reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .card:hover,.person:hover,.btn:hover,.veh:hover{transform:none}
+}
+
+/* load-in wipe for hero lines */
+.ln > i{transform:translateY(105%);transition:transform 1s var(--ease)}
+.loaded .ln > i{transform:none}
+.loaded .ln:nth-child(2) > i{transition-delay:.11s}
+.loaded .ln:nth-child(3) > i{transition-delay:.22s}
+.fade-up{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease) .45s,transform .9s var(--ease) .45s}
+.loaded .fade-up{opacity:1;transform:none}
+.fade-up.d2{transition-delay:.58s}
+.fade-up.d3{transition-delay:.7s}
+@media (prefers-reduced-motion:reduce){
+  .ln > i,.fade-up{transform:none;opacity:1;transition:none}
+}
+.skip{position:absolute;left:-9999px;top:0;background:var(--hivis);color:#17120f;padding:.7rem 1rem;z-index:100;font-weight:700}
+.skip:focus{left:.5rem;top:.5rem}
+</style>
+
+<a class="skip" href="#glavna">Preskoči na vsebino</a>
+
+<header class="hdr" id="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="#vrh" aria-label="PGD Ostrožno — na vrh">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 2.5 35 8v13.5c0 8.6-6 14.2-15 16.5C11 35.7 5 30.1 5 21.5V8z" fill="none" stroke="#ce1f1b" stroke-width="2.4"/>
+        <path d="M11.5 15.5 20 20l8.5-4.5M11.5 22.5 20 27l8.5-4.5" fill="none" stroke="#f5b024" stroke-width="2.4" stroke-linecap="square"/>
+      </svg>
+      <span class="brand-t">
+        <b>PGD Ostrožno</b>
+        <span>Celje · od 1946</span>
+      </span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Glavna navigacija">
+      <a href="#drustvo">Društvo</a>
+      <a href="#dejavnosti">Dejavnosti</a>
+      <a href="#vozila">Vozni park</a>
+      <a href="#zgodovina">Zgodovina</a>
+      <a href="#poveljstvo">Poveljstvo</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <button class="tt" id="tt" type="button" aria-label="Preklopi temo">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5z"/></svg>
+    </button>
+
+    <a class="sos" href="tel:112"><span class="sos-w">Klic v sili</span><b>112</b></a>
+
+    <button class="burger" id="burger" type="button" aria-label="Meni" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="glavna">
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="vrh">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="chevrons"></div>
+    <div class="beacon"><i></i><i class="b2"></i></div>
+  </div>
+
+  <div class="wrap hero-in">
+    <div class="eyebrow fade-up">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="stencil">Prostovoljno gasilsko društvo Ostrožno</span>
+      <span class="stencil sep" aria-hidden="true">/</span>
+      <span class="stencil">Gasilska zveza Celje</span>
+    </div>
+
+    <h1 class="h1">
+      <span class="ln"><i>Ko zazvoni,</i></span>
+      <span class="ln"><i>smo že</i></span>
+      <span class="ln"><i><em>na poti.</em></i></span>
+    </h1>
+
+    <p class="hero-lede fade-up d2">
+      Osemdeset let stojimo za istim dogovorom s krajem: kadarkoli, v vsakem vremenu,
+      brezplačno. Prostovoljci iz Ostrožnega, ki gasijo, rešujejo, učijo in vzgajajo
+      naslednjo generacijo — ker se nesreča ne naroči vnaprej.
+    </p>
+
+    <div class="hero-cta fade-up d3">
+      <a class="btn btn-fill" href="#pridruzi">
+        Postani gasilec
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#dejavnosti">Kaj počnemo</a>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="wrap" style="padding-inline:0">
+      <div class="strip-in">
+        <div class="stat"><b data-count="1946" data-plain="1">1946</b><span>Leto ustanovitve</span></div>
+        <div class="stat"><b><span data-count="80">0</span></b><span>Let neprekinjenega dela</span></div>
+        <div class="stat"><b>24<i>/</i>7</b><span>Pripravljenost enote</span></div>
+        <div class="stat"><b><i>112</i></b><span>Klic v sili · vedno</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ O DRUŠTVU ══════════ -->
+<section class="sec" id="drustvo">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="kicker"><span class="bar" aria-hidden="true"></span><span class="stencil">01 · O društvu</span></div>
+        <h2 class="h2">Sosedje, ki pridejo prvi</h2>
+      </div>
+      <p>Enota deluje v okviru Gasilske zveze Celje in pokriva območje krajevne skupnosti Ostrožno ter po potrebi sodeluje na širšem celjskem območju.</p>
+    </div>
+
+    <div class="about">
+      <div class="body-col rv">
+        <p class="lede">
+          Nihče od nas ni gasilec po poklicu. Smo <b>ključavničarji, vzgojiteljice, študentje, upokojenci</b> —
+          in ko piskač zapiska, pustimo za sabo večerjo, izmeno ali spanec.
+        </p>
+        <p>
+          Prostovoljno gasilsko društvo Ostrožno je bilo ustanovljeno leta 1946, ko je peščica
+          domačinov sklenila, da si kraj zasluži lastno gasilsko enoto. Od takrat se je zamenjalo
+          več generacij, oprema je iz ročnih brizgaln prerasla v sodobno gasilsko vozilo s cisterno,
+          bistvo pa je ostalo enako: ljudje, ki so pripravljeni priskočiti na pomoč.
+        </p>
+        <p>
+          Poleg intervencij — požarov, prometnih nesreč, tehničnega reševanja, poplav in vetrolomov —
+          je velik del našega dela nevidnega. To so vaje ob četrtkih, servis opreme, preventivni obiski
+          po hišah, dnevi odprtih vrat in ure, ki jih mentorji preživijo z mladimi gasilci.
+        </p>
+        <p>
+          Društvo živi od prostovoljnega dela članov, članarin, donacij krajanov in podpore
+          Mestne občine Celje. Vsak evro se vidi na vozilu, opremi in usposabljanju.
+        </p>
+      </div>
+
+      <!-- ⚠ PODATKI ZA UREDITI: številke članstva in intervencij so okvirne — zamenjajte z uradnimi -->
+      <aside class="rail rv" aria-label="Podatki o društvu">
+        <dl><dt>Ustanovitev</dt><dd>26. 9. 1946</dd></dl>
+        <dl><dt>Sedež</dt><dd>Cesta na Ostrožno 90</dd></dl>
+        <dl><dt>Kraj</dt><dd>3000 Celje</dd></dl>
+        <dl><dt>Zveza</dt><dd>GZ Celje</dd></dl>
+        <dl><dt>Operativa</dt><dd>24 ur / 7 dni</dd></dl>
+        <dl><dt>Sektorji</dt><dd>5</dd></dl>
+        <dl><dt>Telefon</dt><dd>03 490 28 28</dd></dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" aria-hidden="true">
+
+<!-- ══════════ DEJAVNOSTI ══════════ -->
+<section class="sec sec-alt" id="dejavnosti">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="kicker"><span class="bar" aria-hidden="true"></span><span class="stencil">02 · Dejavnosti</span></div>
+        <h2 class="h2">Šest stebrov društva</h2>
+      </div>
+      <p>Intervencija je samo vrh. Pod njo je vsakotedensko delo, ki poskrbi, da je odziv ob treh zjutraj enako zanesljiv kot ob treh popoldne.</p>
+    </div>
+
+    <div class="grid rv">
+      <article class="card">
+        <span class="tag">01</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 2c1.5 3.5-1 5-1 7a3 3 0 0 0 6 0c0-1-.3-1.8-.8-2.6C18.9 8.6 20 11.1 20 14a8 8 0 1 1-16 0C4 8.5 9 6.5 12 2z"/></svg>
+        <h3>Operativa in intervencije</h3>
+        <p>Požari, prometne nesreče, tehnično reševanje, poplave in vetrolomi. Operativna enota je razpoložljiva neprekinjeno, aktivira jo ReCO Celje.</p>
+      </article>
+
+      <article class="card">
+        <span class="tag">02</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3 4 6.5v5.2c0 5 3.4 8.6 8 9.8 4.6-1.2 8-4.8 8-9.8V6.5z"/><path d="M9.2 12.2l2 2 3.6-4"/></svg>
+        <h3>Preventiva in izobraževanje</h3>
+        <p>Mesec požarne varnosti, obiski v vrtcih in šolah, svetovanje o dimnikih, javljalnikih dima in gasilnikih ter evakuacijske vaje.</p>
+      </article>
+
+      <article class="card">
+        <span class="tag">03</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M2.8 20c0-3.4 2.8-5.6 6.2-5.6s6.2 2.2 6.2 5.6"/><path d="M17 7.5h4M19 5.5v4"/></svg>
+        <h3>Mladi gasilci</h3>
+        <p>Pionirji in mladinci od šestega leta dalje. Vaje, kvizi, orientacija in tabori — tu se gradi ekipa, ki bo enoto vodila čez dvajset let.</p>
+      </article>
+
+      <article class="card">
+        <span class="tag">04</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 21s-7-4.6-7-9.6A4.4 4.4 0 0 1 12 8a4.4 4.4 0 0 1 7 3.4C19 16.4 12 21 12 21z"/></svg>
+        <h3>Članice</h3>
+        <p>Ženska desetina je enakovreden del operative in tekmovalnega programa — od dela z orodjem do organizacije društvenih dogodkov.</p>
+      </article>
+
+      <article class="card">
+        <span class="tag">05</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="9" r="5"/><path d="M8.5 13.4 7 22l5-2.6L17 22l-1.5-8.6"/></svg>
+        <h3>Veterani</h3>
+        <p>Članice in člani nad 60 let ostajajo srce društva: skrbijo za arhiv, praporja, tradicijo in prenašajo izkušnje na mlajše rodove.</p>
+      </article>
+
+      <article class="card">
+        <span class="tag">06</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 3h12v4a6 6 0 0 1-12 0z"/><path d="M6 5H3.5v1.5A3.5 3.5 0 0 0 6.6 10M18 5h2.5v1.5A3.5 3.5 0 0 1 17.4 10"/><path d="M12 13v4M8.5 21h7"/></svg>
+        <h3>Gasilska tekmovanja</h3>
+        <p>Vaja z vodo, štafeta in mokri napad. Tekmovanja niso šport zaradi pokalov — merijo natanko tisto, kar šteje na intervenciji: čas in natančnost.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" aria-hidden="true">
+
+<!-- ══════════ VOZNI PARK ══════════ -->
+<section class="sec" id="vozila">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="kicker"><span class="bar" aria-hidden="true"></span><span class="stencil">03 · Vozni park</span></div>
+        <h2 class="h2">Oprema, ki mora vžgati vsakič</h2>
+      </div>
+      <p>Vozila in oprema so v celoti v lasti društva. Vzdržujemo jih sami, tedensko preverjamo in vsako leto tehnično pregledamo.</p>
+    </div>
+
+    <!-- ⚠ PODATKI ZA UREDITI: GVC-1 je potrjeno vozilo iz leta 2026; ostala vozila in letnice preverite v društvenem registru -->
+    <div class="fleet rv">
+      <article class="veh">
+        <div class="veh-code">GVC-1 <s>2026</s></div>
+        <div>
+          <h3>Gasilsko vozilo s cisterno</h3>
+          <p>Najnovejša pridobitev društva, sofinancirana z 30.000 € Mestne občine Celje in zbrana s stotinami ur prostovoljnega dela. Nosi vodo, visokotlačno napravo in celotno opremo prve skupine za posredovanje.</p>
+        </div>
+        <div class="veh-meta">
+          <span class="chip chip-hot">Novo 2026</span>
+          <span class="chip">Cisterna</span>
+          <span class="chip">Prva skupina</span>
+        </div>
+      </article>
+
+      <article class="veh">
+        <div class="veh-code">GVM-1 <s>moštvo</s></div>
+        <div>
+          <h3>Gasilsko vozilo za moštvo</h3>
+          <p>Prevoz operativne desetine, izolirnih dihalnih aparatov in orodja za tehnično reševanje. Vozilo, ki na kraj dogodka pripelje ljudi — najpomembnejši del vsake intervencije.</p>
+        </div>
+        <div class="veh-meta">
+          <span class="chip">1 + 8 mest</span>
+          <span class="chip">IDA</span>
+          <span class="chip">Tehnično reševanje</span>
+        </div>
+      </article>
+
+      <article class="veh">
+        <div class="veh-code">PV-1 <s>poveljstvo</s></div>
+        <div>
+          <h3>Poveljniško vozilo</h3>
+          <p>Hitro vozilo za vodjo intervencije, ogled kraja dogodka in prve ukrepe. Opremljeno z zvezami, gasilnikom in kompletom za nudenje prve pomoči.</p>
+        </div>
+        <div class="veh-meta">
+          <span class="chip">Vodenje</span>
+          <span class="chip">Zveze</span>
+          <span class="chip">Prva pomoč</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ZGODOVINA ══════════ -->
+<section class="sec sec-alt" id="zgodovina">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="kicker"><span class="bar" aria-hidden="true"></span><span class="stencil">04 · Zgodovina</span></div>
+        <h2 class="h2">Osem desetletij, ena naloga</h2>
+      </div>
+      <p>Kronologija je urejena po letnicah, ker gasilska zgodovina teče v zaporedju: brez doma ni enote, brez enote ni vozila, brez vozila ni odziva.</p>
+    </div>
+
+    <div class="tl rv" id="tl">
+      <article class="ev">
+        <span class="yr">26. september 1946</span>
+        <h3>Ustanovitev</h3>
+        <p>Na Ostrožnem je ustanovljena Prostovoljna gasilska četa Ostrožno. Ob ustanovitvi šteje 25 članov, 3 članice in 10 mladincev, za poveljnika je izvoljen Jože Fidler.</p>
+      </article>
+
+      <article class="ev">
+        <span class="yr">1950</span>
+        <h3>Iz čete v društvo</h3>
+        <p>Gasilska enota Ostrožno postane Prostovoljno gasilsko društvo Ostrožno. Vodenje prevzame Franc Dimec, ob njem pa zraste nova generacija gasilcev: Vili Radič, Vili Gruber, Slavko Turnšek, Franc Turnšek in Stanko Gaberšek.</p>
+      </article>
+
+      <article class="ev">
+        <span class="yr">1955</span>
+        <h3>Povezovanje v zvezo</h3>
+        <p>Ustanovljena je Občinska gasilska zveza Celje, ki poveže prostovoljna društva celjskega območja. Ostrožno je med njimi — skupno usposabljanje in enotno alarmiranje postaneta pravilo.</p>
+      </article>
+
+      <article class="ev">
+        <span class="yr">1956</span>
+        <h3>Gasilski dom</h3>
+        <p>Ob deseti obletnici društva je slovesno odprt gasilski dom, zgrajen s prostovoljnim delom članov in podporo krajanov. Dom še danes ostaja središče društvenega življenja.</p>
+      </article>
+
+      <article class="ev">
+        <span class="yr">2026</span>
+        <h3>Novo vozilo GVC-1</h3>
+        <p>Po letih zbiranja sredstev in prostovoljnega dela enota prevzame novo gasilsko vozilo s cisterno. Mestna občina Celje nakup sofinancira s 30.000 €. Pripravljenost enote in varnost krajanov se občutno okrepita.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" aria-hidden="true">
+
+<!-- ══════════ POVELJSTVO ══════════ -->
+<section class="sec" id="poveljstvo">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="kicker"><span class="bar" aria-hidden="true"></span><span class="stencil">05 · Poveljstvo</span></div>
+        <h2 class="h2">Kdo vodi enoto</h2>
+      </div>
+      <p>Za splošna vprašanja o društvu pokličite predsednika, za operativne zadeve in vaje pa poveljnika.</p>
+    </div>
+
+    <div class="team rv">
+      <article class="person">
+        <div class="avatar" aria-hidden="true">AČ</div>
+        <div class="role">Predsednik društva</div>
+        <h3>Andrej Čuček</h3>
+        <a href="tel:+38631726255">031 726 255</a>
+      </article>
+      <article class="person">
+        <div class="avatar" aria-hidden="true">GS</div>
+        <div class="role">Podpredsednik</div>
+        <h3>Gregor Smode</h3>
+        <a href="tel:+38641794429">041 794 429</a>
+      </article>
+      <article class="person">
+        <div class="avatar" aria-hidden="true">MO</div>
+        <div class="role">Poveljnik</div>
+        <h3>Miha Ocvirk</h3>
+        <a href="tel:+38670391601">070 391 601</a>
+      </article>
+      <article class="person">
+        <div class="avatar" aria-hidden="true">AP</div>
+        <div class="role">Namestnik poveljnika</div>
+        <h3>Andrej Polenik</h3>
+        <a href="tel:+38641763246">041 763 246</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PRIDRUŽI SE ══════════ -->
+<section class="join" id="pridruzi">
+  <div class="chevrons" aria-hidden="true"></div>
+  <div class="wrap join-in">
+    <div class="rv">
+      <div class="kicker"><span class="bar" aria-hidden="true"></span><span class="stencil" style="color:#a89e98">06 · Postani član</span></div>
+      <h2>Za to delo ni pogoj mišica.<br>Pogoj je, da prideš.</h2>
+      <p>
+        Sprejemamo nove operativne članice in člane, mentorje mladine ter podporne člane.
+        Vso opremo in usposabljanje krije društvo — od tebe pričakujemo redne vaje
+        in to, da se odzoveš, ko lahko.
+      </p>
+      <a class="btn btn-fill" href="mailto:pgd.ostrozno.celje@gmail.com?subject=Zanima%20me%20clanstvo%20v%20PGD%20Ostrozno">
+        Piši nam
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+    <ul class="join-list rv">
+      <li><b>01</b> Dopolnjenih 16 let za operativo, 6 let za mladino</li>
+      <li><b>02</b> Zdravstvena sposobnost in opravljen tečaj za gasilca</li>
+      <li><b>03</b> Udeležba na tedenskih vajah</li>
+      <li><b>04</b> Oprema, tečaji in zavarovanje — brezplačno</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════ KONTAKT ══════════ -->
+<section class="sec sec-alt" id="kontakt">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="kicker"><span class="bar" aria-hidden="true"></span><span class="stencil">07 · Kontakt</span></div>
+        <h2 class="h2">Kje nas najdete</h2>
+      </div>
+      <p>Pisarna ni stalno zasedena — če se ne oglasimo, pišite na e-naslov ali pokličite predsednika oziroma poveljnika.</p>
+    </div>
+
+    <div class="contact rv">
+      <div class="cbox">
+        <div class="crow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <div><span class="k">Naslov</span><span class="v">Cesta na Ostrožno 90<br>3000 Celje</span></div>
+        </div>
+        <div class="crow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4.5 4h4l1.6 4-2.2 1.6a12.5 12.5 0 0 0 6.5 6.5L16 13.9l4 1.6v4a1.5 1.5 0 0 1-1.7 1.5C10.6 20.2 3.8 13.4 3 5.7A1.5 1.5 0 0 1 4.5 4z"/></svg>
+          <div><span class="k">Telefon društva</span><a href="tel:+38634902828">03 490 28 28</a></div>
+        </div>
+        <div class="crow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>
+          <div><span class="k">E-pošta</span><a href="mailto:pgd.ostrozno.celje@gmail.com">pgd.ostrozno.celje@gmail.com</a></div>
+        </div>
+        <div class="crow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.4l3.4 2"/></svg>
+          <div><span class="k">Vaje operativne enote</span><span class="v">Četrtek · 19.00</span></div>
+        </div>
+      </div>
+
+      <div class="emergency">
+        <span class="stencil">Klic v sili</span>
+        <div class="num">112</div>
+        <p>
+          Ob požaru, prometni nesreči ali drugi nesreči takoj pokličite 112.
+          Povejte, kaj se je zgodilo, kje, koliko je poškodovanih in kdo kliče.
+          <strong>Ostanite na zvezi, dokler operater ne konča pogovora.</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-in">
+      <div>
+        <h4>PGD Ostrožno</h4>
+        <p style="max-width:40ch;color:var(--bay-mute)">
+          Prostovoljno gasilsko društvo Ostrožno, član Gasilske zveze Celje.
+          V službi krajanov neprekinjeno od leta 1946.
+        </p>
+      </div>
+      <div>
+        <h4>Razdelki</h4>
+        <ul>
+          <li><a href="#drustvo">O društvu</a></li>
+          <li><a href="#dejavnosti">Dejavnosti</a></li>
+          <li><a href="#vozila">Vozni park</a></li>
+          <li><a href="#zgodovina">Zgodovina</a></li>
+          <li><a href="#poveljstvo">Poveljstvo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Stik</h4>
+        <ul>
+          <li>Cesta na Ostrožno 90, 3000 Celje</li>
+          <li><a href="tel:+38634902828">03 490 28 28</a></li>
+          <li><a href="mailto:pgd.ostrozno.celje@gmail.com">pgd.ostrozno.celje@gmail.com</a></li>
+          <li><a href="tel:112">Klic v sili: 112</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr-btm">
+      <span>© <span id="leto">2026</span> PGD Ostrožno</span>
+      <span>Na pomoč!</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- tema: shranjena izbira zmaga nad sistemsko ---- */
+  var root = document.documentElement, tt = document.getElementById("tt");
+  try{
+    var saved = localStorage.getItem("pgd-theme");
+    if(saved === "dark" || saved === "light") root.setAttribute("data-theme", saved);
+  }catch(e){}
+  tt.addEventListener("click", function(){
+    var dark = root.getAttribute("data-theme") === "dark" ||
+      (!root.hasAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    var next = dark ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try{ localStorage.setItem("pgd-theme", next); }catch(e){}
+  });
+
+  /* ---- uvodna sekvenca ---- */
+  requestAnimationFrame(function(){ document.body.classList.add("loaded"); });
+
+  /* ---- glava: stisni ob pomiku, mobilni meni ---- */
+  var hdr = document.getElementById("hdr"), burger = document.getElementById("burger");
+  burger.addEventListener("click", function(){
+    var open = hdr.classList.toggle("open");
+    burger.setAttribute("aria-expanded", String(open));
+  });
+  document.getElementById("nav").addEventListener("click", function(e){
+    if(e.target.tagName === "A"){ hdr.classList.remove("open"); burger.setAttribute("aria-expanded","false"); }
+  });
+
+  /* ---- razkrivanje ob pomiku ---- */
+  var rv = document.querySelectorAll(".rv");
+  if(reduce || !("IntersectionObserver" in window)){
+    rv.forEach(function(el){ el.classList.add("in"); });
+  }else{
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, {rootMargin:"0px 0px -12% 0px", threshold:.12});
+    rv.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---- števci v pasu ---- */
+  var counters = document.querySelectorAll("[data-count]");
+  counters.forEach(function(el){
+    var target = parseInt(el.getAttribute("data-count"), 10);
+    if(reduce || el.hasAttribute("data-plain")){ el.textContent = String(target); return; }
+    var started = false;
+    var co = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(!en.isIntersecting || started) return;
+        started = true; co.disconnect();
+        var t0 = null, dur = 1400;
+        function step(ts){
+          if(t0 === null) t0 = ts;
+          var p = Math.min((ts - t0)/dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = String(Math.round(target * eased));
+          if(p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, {threshold:.6});
+    co.observe(el);
+  });
+
+  /* ---- časovnica: cev, ki se polni ob pomiku ---- */
+  var tl = document.getElementById("tl");
+  var evs = tl ? Array.prototype.slice.call(tl.querySelectorAll(".ev")) : [];
+  var ticking = false;
+  function paintTimeline(){
+    ticking = false;
+    if(!tl) return;
+    var r = tl.getBoundingClientRect();
+    var anchor = window.innerHeight * 0.68;
+    var p = (anchor - r.top) / r.height;
+    p = Math.max(0, Math.min(1, p));
+    tl.style.setProperty("--fill", reduce ? 1 : p.toFixed(3));
+    evs.forEach(function(ev){
+      var er = ev.getBoundingClientRect();
+      ev.classList.toggle("lit", er.top < anchor);
+    });
+  }
+  function onScroll(){
+    hdr.classList.toggle("compact", window.scrollY > 40);
+    if(!ticking){ ticking = true; requestAnimationFrame(paintTimeline); }
+  }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  window.addEventListener("resize", onScroll, {passive:true});
+  onScroll();
+
+  /* ---- aktivna povezava v navigaciji ---- */
+  var links = Array.prototype.slice.call(document.querySelectorAll(".nav a"));
+  var targets = links.map(function(a){ return document.querySelector(a.getAttribute("href")); });
+  if("IntersectionObserver" in window){
+    var so = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(!en.isIntersecting) return;
+        var i = targets.indexOf(en.target);
+        links.forEach(function(a, j){ a.classList.toggle("on", j === i); });
+      });
+    }, {rootMargin:"-45% 0px -50% 0px"});
+    targets.forEach(function(t){ if(t) so.observe(t); });
+  }
+
+  document.getElementById("leto").textContent = new Date().getFullYear();
+})();
+</script>
