@@ -1,0 +1,1794 @@
+<!doctype html>
+<html lang="sl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sontro — Sončne elektrarne in električne polnilnice</title>
+<meta name="description" content="Sontro d.o.o. iz Braslovč: sončne elektrarne na ključ, baterijski hranilniki in električne polnilnice za dom in podjetja. Svetovanje, projektiranje, izvedba, meritve in zagon.">
+<meta name="theme-color" content="#06101a" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f3f5f8" media="(prefers-color-scheme: light)">
+<meta name="author" content="Sontro d.o.o.">
+<link rel="canonical" href="https://www.sontro.si/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="sl_SI">
+<meta property="og:site_name" content="Sontro">
+<meta property="og:title" content="Sontro — Sončne elektrarne in električne polnilnice">
+<meta property="og:description" content="Celovite energetske rešitve: sončna elektrarna, hranilnik in polnilnica za električni avto — od svetovanja do zagona.">
+<meta property="og:url" content="https://www.sontro.si/">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23081420'/%3E%3Cpath d='M32 12v10M32 42v10M12 32h10M42 32h10M18 18l7 7M39 39l7 7M46 18l-7 7M25 39l-7 7' stroke='%23ffb52e' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='32' r='9' fill='%2314e0a0'/%3E%3C/svg%3E">
+
+<style>
+/* ============================================================
+   SONTRO — design tokens
+   Dark  = "nočno omrežje"  (deep navy, sun amber, volt green)
+   Light = "dnevna svetloba" (cool paper, same brand accents)
+   ============================================================ */
+:root{
+  /* brand — identical in both themes */
+  --sun:#ffb52e;
+  --sun-deep:#f07c00;
+  --ember:#ff5f2e;
+  --volt:#14e0a0;
+  --volt-deep:#00a97a;
+  --sky:#4da3ff;
+
+  --grad-sun:linear-gradient(135deg,var(--sun) 0%,var(--sun-deep) 55%,var(--ember) 100%);
+  --grad-volt:linear-gradient(135deg,var(--volt) 0%,var(--volt-deep) 100%);
+  --grad-duo:linear-gradient(115deg,var(--sun) 0%,var(--volt) 100%);
+
+  /* dark theme surface set (default) */
+  --bg:#06101a;
+  --bg-2:#08141f;
+  --surface:#0c1a26;
+  --surface-2:#0f202e;
+  --glass:rgba(255,255,255,.045);
+  --glass-2:rgba(255,255,255,.075);
+  --ink:#eaf2f8;
+  --ink-2:#b6c6d4;
+  --mute:#7d92a4;
+  --line:rgba(234,242,248,.12);
+  --line-soft:rgba(234,242,248,.06);
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 18px 44px -22px rgba(0,0,0,.9);
+  --shadow-lift:0 2px 6px rgba(0,0,0,.55),0 44px 90px -34px rgba(0,0,0,1);
+  --halo:0 0 0 1px rgba(255,181,46,.18),0 22px 70px -30px rgba(255,181,46,.5);
+
+  /* type scale — 1.25 */
+  --t-xs:.74rem; --t-sm:.86rem; --t-base:1rem; --t-md:1.14rem;
+  --t-lg:1.4rem; --t-xl:1.86rem; --t-2xl:2.45rem; --t-3xl:3.3rem; --t-4xl:4.6rem;
+
+  --gutter:clamp(1.15rem,4.6vw,4.5rem);
+  --maxw:1280px;
+  --r-sm:10px; --r:16px; --r-lg:24px; --r-xl:34px;
+  --ease:cubic-bezier(.22,.9,.28,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#f2f5f8;
+  --bg-2:#e8edf3;
+  --surface:#ffffff;
+  --surface-2:#f6f8fb;
+  --glass:rgba(8,20,32,.035);
+  --glass-2:rgba(8,20,32,.06);
+  --ink:#08141f;
+  --ink-2:#2f4256;
+  --mute:#5f7385;
+  --line:rgba(8,20,32,.13);
+  --line-soft:rgba(8,20,32,.07);
+  --shadow:0 1px 2px rgba(8,20,32,.06),0 16px 40px -22px rgba(8,20,32,.4);
+  --shadow-lift:0 2px 6px rgba(8,20,32,.08),0 40px 84px -34px rgba(8,20,32,.5);
+  --halo:0 0 0 1px rgba(240,124,0,.2),0 22px 60px -30px rgba(240,124,0,.35);
+  color-scheme:light;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font:400 var(--t-base)/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:Sora,Inter,system-ui,sans-serif;font-weight:600;letter-spacing:-.025em;line-height:1.08;margin:0}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+::selection{background:var(--sun);color:#08141f}
+:focus-visible{outline:2px solid var(--sun);outline-offset:3px;border-radius:4px}
+
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- skip link ---------- */
+.skip{position:fixed;top:-100px;left:1rem;z-index:200;background:var(--sun);color:#08141f;padding:.7rem 1.1rem;border-radius:999px;font-weight:700;transition:top .2s var(--ease)}
+.skip:focus{top:1rem}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{position:fixed;inset:0 0 auto 0;z-index:90;transition:background .45s var(--ease),border-color .45s var(--ease),backdrop-filter .45s var(--ease)}
+.nav::after{content:"";position:absolute;inset:auto 0 0 0;height:1px;background:var(--line-soft);opacity:0;transition:opacity .45s var(--ease)}
+.nav.is-stuck{background:color-mix(in oklab,var(--bg) 80%,transparent);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4)}
+.nav.is-stuck::after{opacity:1}
+.nav-in{display:flex;align-items:center;gap:1.4rem;height:76px}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:Sora;font-weight:700;font-size:1.22rem;letter-spacing:-.04em;flex:none}
+.brand-mark{width:34px;height:34px;flex:none}
+.brand small{display:block;font:500 .58rem/1 "JetBrains Mono",monospace;letter-spacing:.24em;color:var(--mute);text-transform:uppercase;margin-top:.28rem}
+.nav-links{display:flex;gap:.15rem;margin-left:auto;align-items:center}
+.nav-links a{position:relative;padding:.55rem .78rem;border-radius:999px;font-size:var(--t-sm);font-weight:500;color:var(--ink-2);transition:color .3s var(--ease),background .3s var(--ease)}
+.nav-links a::after{content:"";position:absolute;left:50%;bottom:.28rem;width:0;height:2px;border-radius:2px;background:var(--grad-duo);transform:translateX(-50%);transition:width .35s var(--ease)}
+.nav-links a:hover{color:var(--ink);background:var(--glass)}
+.nav-links a.active{color:var(--ink)}
+.nav-links a.active::after{width:16px}
+.nav-tools{display:flex;align-items:center;gap:.5rem;flex:none}
+.icon-btn{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--glass);cursor:pointer;transition:transform .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease)}
+.icon-btn:hover{transform:translateY(-2px);border-color:var(--sun);background:var(--glass-2)}
+.icon-btn svg{width:18px;height:18px}
+.sun-i,.moon-i{transition:opacity .3s,transform .4s var(--ease)}
+:root[data-theme="dark"] .moon-i,:root[data-theme="light"] .sun-i{display:none}
+.btn{
+  --btn-bg:var(--grad-sun);
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  padding:.82rem 1.35rem;border:0;border-radius:999px;cursor:pointer;
+  font:600 var(--t-sm)/1 Inter,sans-serif;letter-spacing:-.01em;
+  background:var(--btn-bg);color:#0a1118;
+  box-shadow:0 10px 30px -14px rgba(255,150,40,.85);
+  transition:transform .32s var(--ease),box-shadow .32s var(--ease),filter .32s var(--ease);
+  overflow:hidden;white-space:nowrap;
+}
+.btn::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-120%);transition:transform .75s var(--ease)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 20px 44px -16px rgba(255,150,40,.95)}
+.btn:hover::before{transform:translateX(120%)}
+.btn:active{transform:translateY(-1px)}
+.btn-volt{--btn-bg:var(--grad-volt);box-shadow:0 10px 30px -14px rgba(20,224,160,.8)}
+.btn-volt:hover{box-shadow:0 20px 44px -16px rgba(20,224,160,.9)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn-ghost:hover{border-color:var(--sun);background:var(--glass);box-shadow:none}
+.btn-lg{padding:1.02rem 1.75rem;font-size:var(--t-base)}
+.nav-burger{display:none}
+
+/* mobile drawer */
+.drawer{position:fixed;inset:0;z-index:95;background:color-mix(in oklab,var(--bg) 96%,transparent);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);display:grid;align-content:center;gap:.2rem;padding:var(--gutter);opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
+.drawer.open{opacity:1;pointer-events:auto}
+.drawer a{font-family:Sora;font-size:clamp(1.6rem,7vw,2.3rem);font-weight:600;letter-spacing:-.04em;padding:.42rem 0;border-bottom:1px solid var(--line-soft);opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease),transform .5s var(--ease),color .3s}
+.drawer.open a{opacity:1;transform:none}
+.drawer a:hover{color:var(--sun)}
+.drawer .btn{margin-top:1.4rem;justify-self:start}
+.drawer-close{position:absolute;top:18px;right:var(--gutter)}
+
+/* scroll progress */
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--grad-duo);z-index:99}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;min-height:min(100svh,940px);display:flex;align-items:center;padding:calc(76px + 4vh) 0 5rem;overflow:hidden;isolation:isolate}
+.hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-3;opacity:.85}
+.hero-glow{
+  position:absolute;z-index:-2;pointer-events:none;border-radius:50%;filter:blur(90px);
+}
+.glow-a{width:min(58vw,720px);aspect-ratio:1;top:-22%;right:-12%;background:radial-gradient(circle,rgba(255,181,46,.34),transparent 65%);animation:drift 22s var(--ease) infinite alternate}
+.glow-b{width:min(46vw,560px);aspect-ratio:1;bottom:-24%;left:-14%;background:radial-gradient(circle,rgba(20,224,160,.26),transparent 65%);animation:drift 18s var(--ease) infinite alternate-reverse}
+:root[data-theme="light"] .glow-a{background:radial-gradient(circle,rgba(255,170,20,.4),transparent 65%)}
+:root[data-theme="light"] .glow-b{background:radial-gradient(circle,rgba(20,200,150,.3),transparent 65%)}
+@keyframes drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-5%,7%,0) scale(1.15)}}
+.hero-grid-lines{position:absolute;inset:0;z-index:-2;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 35%,#000 20%,transparent 78%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 35%,#000 20%,transparent 78%)}
+.hero-in{display:grid;grid-template-columns:minmax(0,1.03fr) minmax(0,.97fr);gap:clamp(2rem,5vw,4.5rem);align-items:center;width:100%}
+
+.eyebrow{display:inline-flex;align-items:center;gap:.6rem;padding:.42rem .5rem .42rem .42rem;border:1px solid var(--line);border-radius:999px;background:var(--glass);font:500 var(--t-xs)/1 "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.eyebrow b{white-space:nowrap;display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .55rem;border-radius:999px;background:var(--grad-volt);color:#04150f;font-weight:700;letter-spacing:.08em}
+.pulse-dot{width:6px;height:6px;border-radius:50%;background:#04150f;animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+
+h1.hero-title{font-size:clamp(2.55rem,6.3vw,var(--t-4xl));font-weight:700;letter-spacing:-.045em;margin:1.4rem 0 0}
+.hero-title .line{display:block;overflow:hidden}
+.hero-title .line > span{display:block;transform:translateY(110%);opacity:0;animation:riseIn 1s var(--ease-out) forwards}
+.hero-title .line:nth-child(2) > span{animation-delay:.1s}
+.hero-title .line:nth-child(3) > span{animation-delay:.2s}
+@keyframes riseIn{to{transform:none;opacity:1}}
+.grad-sun{background:var(--grad-sun);-webkit-background-clip:text;background-clip:text;color:transparent}
+.grad-volt{background:var(--grad-volt);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.hero-lead{max-width:56ch;margin-top:1.5rem;font-size:var(--t-md);color:var(--ink-2);line-height:1.72}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.1rem}
+.hero-trust{display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:2.6rem;padding-top:1.7rem;border-top:1px solid var(--line-soft)}
+.trust-i{display:flex;align-items:center;gap:.6rem;font-size:var(--t-sm);color:var(--mute)}
+.trust-i svg{width:18px;height:18px;flex:none;color:var(--volt)}
+
+/* hero panel / flow diagram card */
+.flow-card{position:relative;border:1px solid var(--line);border-radius:var(--r-xl);background:linear-gradient(160deg,var(--surface),var(--surface-2));box-shadow:var(--shadow-lift);padding:1.35rem;overflow:hidden}
+.flow-card::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 80% 0%,rgba(255,181,46,.14),transparent 55%);pointer-events:none}
+.flow-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.9rem}
+.flow-head h3{font-size:var(--t-sm);font-weight:600;letter-spacing:.02em}
+.flow-head p{font:500 var(--t-xs)/1.4 "JetBrains Mono",monospace;color:var(--mute);margin-top:.25rem}
+.seg{display:inline-flex;padding:3px;border-radius:999px;background:var(--glass);border:1px solid var(--line-soft)}
+.seg button{border:0;background:transparent;cursor:pointer;padding:.42rem .72rem;border-radius:999px;font:600 var(--t-xs)/1 Inter,sans-serif;color:var(--mute);transition:color .3s,background .3s}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.flow-svg{width:100%;height:auto}
+.flow-readout{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.9rem}
+.ro{border:1px solid var(--line-soft);border-radius:var(--r-sm);background:var(--glass);padding:.62rem .7rem}
+.ro span{display:block;font:500 .62rem/1 "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.ro b{display:block;margin-top:.34rem;font-family:"JetBrains Mono",monospace;font-size:var(--t-md);font-weight:700;letter-spacing:-.02em}
+.ro.sun b{color:var(--sun)}
+.ro.volt b{color:var(--volt)}
+.ro.sky b{color:var(--sky)}
+
+/* flow animation */
+.flow-path{fill:none;stroke-width:2.2;stroke-linecap:round}
+.flow-dash{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-dasharray:7 13;animation:dashmove 1.1s linear infinite}
+@keyframes dashmove{to{stroke-dashoffset:-40}}
+.flow-node{transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.node-box{fill:var(--surface-2);stroke:var(--line);stroke-width:1}
+.node-lab{font:600 8.5px Inter,sans-serif;fill:var(--ink-2);letter-spacing:.02em}
+.node-val{font:700 10px "JetBrains Mono",monospace;letter-spacing:-.02em}
+.dimmed{opacity:.22}
+
+/* ============================================================
+   SECTION PRIMITIVES
+   ============================================================ */
+section{position:relative;scroll-margin-top:86px}
+.sect{padding:clamp(4.5rem,10vw,8.5rem) 0}
+.sect-head{max-width:66ch;margin-bottom:clamp(2.2rem,5vw,3.6rem)}
+.sect-head.center{margin-inline:auto;text-align:center}
+.kicker{display:inline-flex;align-items:center;gap:.55rem;font:600 var(--t-xs)/1 "JetBrains Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.kicker::before{content:"";width:26px;height:1px;background:var(--grad-duo)}
+.sect-head.center .kicker::after{content:"";width:26px;height:1px;background:var(--grad-duo)}
+.sect-head h2{font-size:clamp(2rem,4.6vw,var(--t-3xl));margin-top:1rem;letter-spacing:-.04em}
+.sect-head p{margin-top:1.1rem;color:var(--ink-2);font-size:var(--t-md);line-height:1.74}
+.rule{height:1px;background:var(--line-soft)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .85s var(--ease-out),transform .85s var(--ease-out)}
+.rv.in{opacity:1;transform:none}
+.rv-d1{transition-delay:.07s}.rv-d2{transition-delay:.14s}.rv-d3{transition-delay:.21s}
+.rv-d4{transition-delay:.28s}.rv-d5{transition-delay:.35s}.rv-d6{transition-delay:.42s}
+
+/* ============================================================
+   MARQUEE / LOGO STRIP
+   ============================================================ */
+.strip{border-block:1px solid var(--line-soft);background:var(--bg-2);padding:1.15rem 0;overflow:hidden;--mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:var(--mask);-webkit-mask-image:var(--mask)}
+.strip-track{display:flex;gap:3.2rem;width:max-content;animation:marquee 38s linear infinite}
+.strip:hover .strip-track{animation-play-state:paused}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.strip-i{display:flex;align-items:center;gap:.6rem;font:600 var(--t-sm)/1 Inter,sans-serif;color:var(--mute);white-space:nowrap;letter-spacing:-.01em}
+.strip-i svg{width:16px;height:16px;color:var(--sun);flex:none}
+
+/* ============================================================
+   SERVICE CARDS
+   ============================================================ */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:1.05rem}
+.card{
+  position:relative;display:flex;flex-direction:column;gap:.85rem;
+  padding:1.7rem 1.55rem 1.6rem;border:1px solid var(--line);border-radius:var(--r-lg);
+  background:linear-gradient(170deg,var(--surface),var(--surface-2));
+  box-shadow:var(--shadow);overflow:hidden;isolation:isolate;
+  transition:transform .5s var(--ease),border-color .5s var(--ease),box-shadow .5s var(--ease)
+}
+.card::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),color-mix(in oklab,var(--accent,var(--sun)) 70%,transparent),transparent 45%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .45s var(--ease);pointer-events:none}
+.card::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),color-mix(in oklab,var(--accent,var(--sun)) 12%,transparent),transparent 60%);opacity:0;transition:opacity .45s var(--ease)}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lift)}
+.card:hover::before,.card:hover::after{opacity:1}
+.card-ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;border:1px solid var(--line);background:var(--glass);color:var(--accent,var(--sun));flex:none;transition:transform .5s var(--ease)}
+.card:hover .card-ico{transform:scale(1.08) rotate(-4deg)}
+.card-ico svg{width:23px;height:23px}
+.card h3{font-size:var(--t-md);letter-spacing:-.02em}
+.card p{color:var(--ink-2);font-size:var(--t-sm);line-height:1.72}
+.card ul{margin:.1rem 0 0;padding:0;list-style:none;display:grid;gap:.42rem}
+.card li{position:relative;padding-left:1.15rem;font-size:var(--t-sm);color:var(--mute)}
+.card li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent,var(--sun));opacity:.8}
+.card-more{margin-top:auto;padding-top:.9rem;display:inline-flex;align-items:center;gap:.45rem;font:600 var(--t-sm)/1 Inter,sans-serif;color:var(--accent,var(--sun))}
+.card-more svg{width:15px;height:15px;transition:transform .35s var(--ease)}
+.card:hover .card-more svg{transform:translateX(4px)}
+.card-n{position:absolute;top:1.2rem;right:1.3rem;font:700 var(--t-xs)/1 "JetBrains Mono",monospace;color:var(--mute);opacity:.5}
+
+/* ============================================================
+   PILLAR (split feature) sections
+   ============================================================ */
+.pillar{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:clamp(2rem,5vw,4.2rem);align-items:center}
+.pillar.rev > .pillar-media{order:-1}
+.pillar-media{position:relative;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--line);background:linear-gradient(165deg,var(--surface),var(--bg-2));box-shadow:var(--shadow-lift);aspect-ratio:4/3.1}
+.pillar-media svg{width:100%;height:100%}
+.media-tag{position:absolute;left:1rem;bottom:1rem;display:inline-flex;align-items:center;gap:.5rem;padding:.48rem .82rem;border-radius:999px;background:color-mix(in oklab,var(--bg) 72%,transparent);backdrop-filter:blur(10px);border:1px solid var(--line);font:600 var(--t-xs)/1 "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.feat-list{display:grid;gap:.95rem;margin-top:1.9rem}
+.feat{display:flex;gap:.9rem;padding:.2rem 0}
+.feat-ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;background:var(--glass);border:1px solid var(--line-soft);color:var(--accent,var(--sun))}
+.feat-ico svg{width:17px;height:17px}
+.feat h4{font-size:var(--t-base);font-weight:600;margin-bottom:.22rem}
+.feat p{font-size:var(--t-sm);color:var(--mute);line-height:1.68}
+.stat-row{display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--line-soft)}
+.stat b{display:block;font-family:"JetBrains Mono",monospace;font-size:var(--t-xl);font-weight:700;letter-spacing:-.04em;background:var(--grad-sun);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat.v b{background:var(--grad-volt);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{display:block;font-size:var(--t-xs);color:var(--mute);letter-spacing:.06em;text-transform:uppercase;margin-top:.2rem}
+
+/* ============================================================
+   CALCULATOR
+   ============================================================ */
+.calc{border:1px solid var(--line);border-radius:var(--r-xl);background:linear-gradient(165deg,var(--surface),var(--surface-2));box-shadow:var(--shadow-lift);overflow:hidden}
+.calc-tabs{display:flex;gap:.25rem;padding:.5rem;border-bottom:1px solid var(--line-soft);background:var(--glass)}
+.calc-tabs button{flex:1;border:0;background:transparent;cursor:pointer;padding:.85rem 1rem;border-radius:14px;font:600 var(--t-sm)/1 Inter,sans-serif;color:var(--mute);display:inline-flex;align-items:center;justify-content:center;gap:.5rem;transition:color .3s,background .3s}
+.calc-tabs button svg{width:17px;height:17px}
+.calc-tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.calc-body{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+.calc-controls{padding:clamp(1.4rem,3vw,2.2rem);display:grid;gap:1.45rem;align-content:start}
+.ctrl label{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-size:var(--t-sm);font-weight:500;color:var(--ink-2);margin-bottom:.6rem}
+.ctrl output{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:var(--t-base);color:var(--ink)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:999px;background:linear-gradient(90deg,var(--acc,var(--sun)) var(--fill,50%),var(--glass-2) var(--fill,50%));cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--surface);border:2px solid var(--acc,var(--sun));box-shadow:0 4px 14px -4px rgba(0,0,0,.6);cursor:grab;transition:transform .25s var(--ease)}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--surface);border:2px solid var(--acc,var(--sun));cursor:grab}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem}
+.chip{padding:.5rem .85rem;border-radius:999px;border:1px solid var(--line);background:var(--glass);cursor:pointer;font:500 var(--t-sm)/1 Inter,sans-serif;color:var(--ink-2);transition:all .3s var(--ease)}
+.chip[aria-pressed="true"]{border-color:var(--acc,var(--sun));background:color-mix(in oklab,var(--acc,var(--sun)) 16%,transparent);color:var(--ink)}
+.chip:hover{transform:translateY(-2px)}
+.calc-out{padding:clamp(1.4rem,3vw,2.2rem);border-left:1px solid var(--line-soft);background:radial-gradient(120% 80% at 100% 0%,color-mix(in oklab,var(--acc,var(--sun)) 11%,transparent),transparent 60%);display:grid;gap:1rem;align-content:start}
+.big-out{border:1px solid var(--line);border-radius:var(--r);background:var(--glass);padding:1.15rem 1.25rem}
+.big-out span{font:500 var(--t-xs)/1 "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.big-out b{display:block;margin-top:.5rem;font-family:"JetBrains Mono",monospace;font-size:clamp(1.9rem,4vw,2.6rem);font-weight:700;letter-spacing:-.045em;line-height:1;color:var(--acc,var(--sun))}
+.big-out em{display:block;margin-top:.45rem;font-style:normal;font-size:var(--t-xs);color:var(--mute)}
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.mini{border:1px solid var(--line-soft);border-radius:var(--r-sm);background:var(--glass);padding:.8rem .85rem}
+.mini span{display:block;font-size:var(--t-xs);color:var(--mute)}
+.mini b{display:block;margin-top:.28rem;font-family:"JetBrains Mono",monospace;font-size:var(--t-md);font-weight:700;letter-spacing:-.02em}
+.bar{height:9px;border-radius:999px;background:var(--glass-2);overflow:hidden;margin-top:.55rem}
+.bar i{display:block;height:100%;border-radius:999px;background:var(--grad-sun);width:0;transition:width .7s var(--ease-out)}
+.bar.v i{background:var(--grad-volt)}
+.disclaim{font-size:var(--t-xs);color:var(--mute);line-height:1.6}
+.hidden{display:none !important}
+
+/* ============================================================
+   PROCESS TIMELINE
+   ============================================================ */
+.steps{position:relative;display:grid;gap:0}
+.steps::before{content:"";position:absolute;left:23px;top:8px;bottom:8px;width:2px;background:var(--line-soft)}
+.steps::after{content:"";position:absolute;left:23px;top:8px;width:2px;height:var(--prog,0%);background:var(--grad-duo);transition:height .5s linear;box-shadow:0 0 18px rgba(255,181,46,.6)}
+.step{position:relative;display:grid;grid-template-columns:48px minmax(0,1fr);gap:1.3rem;padding:1.15rem 0}
+.step-dot{position:relative;z-index:1;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);font:700 var(--t-sm)/1 "JetBrains Mono",monospace;color:var(--mute);transition:all .5s var(--ease)}
+.step.in .step-dot{border-color:var(--sun);color:var(--sun);box-shadow:0 0 0 6px color-mix(in oklab,var(--sun) 12%,transparent)}
+.step h3{font-size:var(--t-md);margin-bottom:.35rem}
+.step p{color:var(--ink-2);font-size:var(--t-sm);line-height:1.72;max-width:62ch}
+.step-meta{display:inline-flex;align-items:center;gap:.45rem;margin-top:.6rem;font:600 var(--t-xs)/1 "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);border:1px solid var(--line-soft);border-radius:999px;padding:.34rem .65rem}
+
+/* ============================================================
+   WHY / NUMBERS
+   ============================================================ */
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:var(--r-lg);overflow:hidden}
+.why-i{background:var(--bg);padding:1.9rem 1.6rem;transition:background .4s var(--ease)}
+.why-i:hover{background:var(--surface)}
+.why-i b{display:block;font-family:"JetBrains Mono",monospace;font-size:clamp(2rem,4.4vw,2.9rem);font-weight:700;letter-spacing:-.05em;line-height:1;background:var(--grad-duo);-webkit-background-clip:text;background-clip:text;color:transparent}
+.why-i h4{font-size:var(--t-base);margin:.85rem 0 .4rem}
+.why-i p{font-size:var(--t-sm);color:var(--mute);line-height:1.68}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.05rem}
+.quote{border:1px solid var(--line);border-radius:var(--r-lg);background:linear-gradient(170deg,var(--surface),var(--surface-2));padding:1.7rem 1.55rem;box-shadow:var(--shadow);position:relative;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.quote:hover{transform:translateY(-5px);box-shadow:var(--shadow-lift)}
+.quote .stars{display:flex;gap:.18rem;color:var(--sun);margin-bottom:.9rem}
+.quote .stars svg{width:15px;height:15px}
+.quote p{font-size:var(--t-sm);line-height:1.78;color:var(--ink-2)}
+.quote footer{display:flex;align-items:center;gap:.7rem;margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--line-soft)}
+.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font:700 var(--t-sm)/1 Inter,sans-serif;color:#08141f;background:var(--grad-duo);flex:none}
+.quote footer b{display:block;font-size:var(--t-sm);font-weight:600}
+.quote footer span{display:block;font-size:var(--t-xs);color:var(--mute)}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq{display:grid;gap:.6rem;max-width:920px;margin-inline:auto}
+.qa{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden;transition:border-color .4s var(--ease),box-shadow .4s var(--ease)}
+.qa[open]{border-color:color-mix(in oklab,var(--sun) 45%,var(--line));box-shadow:var(--shadow)}
+.qa summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:1rem;padding:1.15rem 1.3rem;font-family:Sora;font-weight:600;font-size:var(--t-base);letter-spacing:-.02em;transition:color .3s}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary:hover{color:var(--sun)}
+.qa .plus{margin-left:auto;width:26px;height:26px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;flex:none;position:relative;transition:transform .45s var(--ease),border-color .3s}
+.qa .plus::before,.qa .plus::after{content:"";position:absolute;background:currentColor;border-radius:2px}
+.qa .plus::before{width:11px;height:1.6px}
+.qa .plus::after{width:1.6px;height:11px;transition:transform .45s var(--ease)}
+.qa[open] .plus{transform:rotate(180deg);border-color:var(--sun);color:var(--sun)}
+.qa[open] .plus::after{transform:scaleY(0)}
+.qa-body{padding:0 1.3rem 1.3rem;color:var(--ink-2);font-size:var(--t-sm);line-height:1.78;max-width:72ch}
+.qa[open] .qa-body{animation:fadeUp .5s var(--ease-out)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+/* ============================================================
+   CTA BAND + CONTACT
+   ============================================================ */
+.band{position:relative;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--line);background:linear-gradient(140deg,var(--surface),var(--bg-2));padding:clamp(2.2rem,5vw,4rem);box-shadow:var(--shadow-lift);isolation:isolate}
+.band::before{content:"";position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(70% 120% at 12% 10%,rgba(255,181,46,.2),transparent 60%),
+  radial-gradient(60% 110% at 90% 90%,rgba(20,224,160,.18),transparent 60%)}
+.band-grid{position:absolute;inset:0;z-index:-1;opacity:.35;background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg,#000,transparent);-webkit-mask-image:linear-gradient(180deg,#000,transparent)}
+.band h2{font-size:clamp(1.9rem,4.3vw,3rem);max-width:19ch}
+.band p{margin-top:1.1rem;color:var(--ink-2);max-width:56ch;font-size:var(--t-md)}
+.band .hero-cta{margin-top:2rem}
+
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:clamp(1.4rem,4vw,3rem);align-items:start}
+.form{display:grid;gap:1rem}
+.field{display:grid;gap:.45rem}
+.field label{font-size:var(--t-sm);font-weight:500;color:var(--ink-2)}
+.field input,.field select,.field textarea{
+  width:100%;padding:.88rem 1rem;border-radius:var(--r-sm);border:1px solid var(--line);
+  background:var(--surface);color:var(--ink);font-size:var(--t-sm);
+  transition:border-color .3s var(--ease),box-shadow .3s var(--ease),background .3s
+}
+.field textarea{min-height:128px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--sun);box-shadow:0 0 0 4px color-mix(in oklab,var(--sun) 16%,transparent)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.consent{display:flex;gap:.65rem;align-items:flex-start;font-size:var(--t-xs);color:var(--mute);line-height:1.6}
+.consent input{width:17px;height:17px;flex:none;margin-top:.15rem;accent-color:var(--sun)}
+.contact-cards{display:grid;gap:.7rem}
+.cc{display:flex;gap:.95rem;align-items:flex-start;padding:1.15rem 1.25rem;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);transition:transform .4s var(--ease),border-color .4s var(--ease)}
+.cc:hover{transform:translateX(4px);border-color:var(--sun)}
+.cc-ico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--glass);border:1px solid var(--line-soft);color:var(--sun);flex:none}
+.cc-ico svg{width:19px;height:19px}
+.cc span{display:block;font:500 var(--t-xs)/1 "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:.35rem}
+.cc b{font-size:var(--t-base);font-weight:600;letter-spacing:-.01em}
+.cc p{font-size:var(--t-sm);color:var(--mute)}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.foot{border-top:1px solid var(--line-soft);background:var(--bg-2);padding:clamp(3rem,6vw,4.5rem) 0 2rem;margin-top:clamp(3rem,7vw,6rem)}
+.foot-top{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));gap:2.2rem}
+.foot-brand p{margin-top:1.1rem;color:var(--mute);font-size:var(--t-sm);max-width:38ch;line-height:1.72}
+.foot h5{font:600 var(--t-xs)/1 "JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin:0 0 1rem}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+.foot a{font-size:var(--t-sm);color:var(--ink-2);transition:color .3s var(--ease)}
+.foot a:hover{color:var(--sun)}
+.foot-bottom{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line-soft);font-size:var(--t-xs);color:var(--mute)}
+.socials{display:flex;gap:.5rem}
+.socials a{width:36px;height:36px;border-radius:11px;border:1px solid var(--line);display:grid;place-items:center;transition:all .35s var(--ease)}
+.socials a:hover{border-color:var(--sun);color:var(--sun);transform:translateY(-3px)}
+.socials svg{width:17px;height:17px}
+
+/* back-to-top */
+.totop{position:fixed;right:clamp(1rem,3vw,2rem);bottom:clamp(1rem,3vw,2rem);z-index:80;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:color-mix(in oklab,var(--surface) 88%,transparent);backdrop-filter:blur(10px);display:grid;place-items:center;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(14px) scale(.9);transition:all .45s var(--ease)}
+.totop.show{opacity:1;pointer-events:auto;transform:none}
+.totop:hover{border-color:var(--sun);color:var(--sun)}
+.totop svg{width:18px;height:18px}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1040px){
+  .hero-in{grid-template-columns:1fr}
+  .flow-card{order:2}
+  .calc-body{grid-template-columns:1fr}
+  .calc-out{border-left:0;border-top:1px solid var(--line-soft)}
+  .foot-top{grid-template-columns:1fr 1fr}
+}
+@media (max-width:860px){
+  .nav-links{display:none}
+  .nav-burger{display:grid}
+  .nav-tools .btn{display:none}
+}
+@media (max-width:560px){
+  .hero-trust{gap:.9rem}
+  .eyebrow{font-size:.68rem;letter-spacing:.08em}
+  .kicker{letter-spacing:.14em}
+  .sect-head.center .kicker::before,.sect-head.center .kicker::after{display:none}
+  .field-row{grid-template-columns:1fr}
+  .flow-readout{grid-template-columns:1fr}
+  .mini-grid{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr}
+  .step{grid-template-columns:40px minmax(0,1fr);gap:1rem}
+  .step-dot{width:40px;height:40px}
+  .steps::before,.steps::after{left:19px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  .rv{opacity:1;transform:none}
+  .hero-title .line > span{transform:none;opacity:1}
+}
+@media print{
+  .nav,.totop,.drawer,.progress,.hero-canvas,.strip{display:none !important}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Preskoči na vsebino</a>
+<div class="progress" id="progress"></div>
+
+<!-- ============================ NAV ============================ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#vrh" aria-label="Sontro — domov">
+      <svg class="brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <rect width="64" height="64" rx="16" fill="url(#bm1)"/>
+        <path d="M32 11v8M32 45v8M11 32h8M45 32h8M17.5 17.5l5.6 5.6M40.9 40.9l5.6 5.6M46.5 17.5l-5.6 5.6M23.1 40.9l-5.6 5.6" stroke="#ffb52e" stroke-width="3.4" stroke-linecap="round"/>
+        <circle cx="32" cy="32" r="9.5" fill="#14e0a0"/>
+        <path d="M33.6 26.8 28 33.4h3.7l-1.3 5 5.6-6.6h-3.7l1.3-5Z" fill="#05231a"/>
+        <defs><linearGradient id="bm1" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0d1f2e"/><stop offset="1" stop-color="#061018"/></linearGradient></defs>
+      </svg>
+      <span>Sontro<small>Energetske rešitve</small></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Glavna navigacija">
+      <a href="#resitve">Rešitve</a>
+      <a href="#soncne">Sončne elektrarne</a>
+      <a href="#polnilnice">Polnilnice</a>
+      <a href="#izracun">Izračun</a>
+      <a href="#potek">Potek</a>
+      <a href="#faq">Vprašanja</a>
+    </nav>
+
+    <div class="nav-tools">
+      <button class="icon-btn" id="themeBtn" aria-label="Preklopi temo" title="Preklopi temo">
+        <svg class="sun-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/></svg>
+        <svg class="moon-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.3A8.6 8.6 0 0 1 9.7 3.5a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>
+      </button>
+      <button class="icon-btn nav-burger" id="burger" aria-label="Odpri meni" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <a class="btn" href="#kontakt">Brezplačna ponudba
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Meni">
+  <button class="icon-btn drawer-close" id="drawerClose" aria-label="Zapri meni">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <a href="#resitve">Rešitve</a>
+  <a href="#soncne">Sončne elektrarne</a>
+  <a href="#polnilnice">Polnilnice</a>
+  <a href="#izracun">Izračun prihranka</a>
+  <a href="#potek">Kako poteka</a>
+  <a href="#faq">Vprašanja</a>
+  <a href="#kontakt">Kontakt</a>
+  <a class="btn btn-lg" href="tel:+38638915100">Pokličite 03 891 51 00</a>
+</div>
+
+<main id="main">
+<!-- ============================ HERO ============================ -->
+<section class="hero" id="vrh">
+  <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="hero-grid-lines" aria-hidden="true"></div>
+  <div class="hero-glow glow-a" aria-hidden="true"></div>
+  <div class="hero-glow glow-b" aria-hidden="true"></div>
+
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <p class="eyebrow"><b><i class="pulse-dot"></i>Sontro d.o.o.</b> <span>Braslovče · vsa Slovenija</span></p>
+
+      <h1 class="hero-title">
+        <span class="line"><span>Vaša streha</span></span>
+        <span class="line"><span>postane <em class="grad-sun" style="font-style:normal">elektrarna</em>,</span></span>
+        <span class="line"><span>garaža <em class="grad-volt" style="font-style:normal">bencinska</em>.</span></span>
+      </h1>
+
+      <p class="hero-lead">
+        Sončne elektrarne, baterijski hranilniki in električne polnilnice — projektirani kot en sam sistem.
+        Sonce napolni hranilnik, hranilnik napolni avto, vi pa plačujete samo tisto, česar si ne pridelate sami.
+        Od svetovanja in projekta do meritev, zagona in papirologije.
+      </p>
+
+      <div class="hero-cta">
+        <a class="btn btn-lg" href="#kontakt">Brezplačen ogled in izračun
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+        </a>
+        <a class="btn btn-lg btn-ghost" href="#izracun">Izračunajte prihranek</a>
+      </div>
+
+      <div class="hero-trust">
+        <span class="trust-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg> Vse na enem mestu — brez podizvajalcev</span>
+        <span class="trust-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6.2v5.1c0 4.5 3.1 8.6 7.5 9.7 4.4-1.1 7.5-5.2 7.5-9.7V6.2Z"/><path d="m9.2 12.2 2 2 3.6-4"/></svg> Meritve, zagon in vsa dokumentacija</span>
+        <span class="trust-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11l-.8 8.5 8.8-11.8H12.4Z"/></svg> Elektrarna, hranilnik in polnilnica usklajeni</span>
+      </div>
+    </div>
+
+    <!-- LIVE ENERGY FLOW DIAGRAM -->
+    <div class="flow-card rv" id="flowCard">
+      <div class="flow-head">
+        <div>
+          <h3>Pretok energije v vašem domu</h3>
+          <p id="flowCaption">SONČEN DAN · 13:20</p>
+        </div>
+        <div class="seg" role="group" aria-label="Način prikaza">
+          <button id="modeDay" aria-pressed="true">Dan</button>
+          <button id="modeNight" aria-pressed="false">Noč</button>
+        </div>
+      </div>
+
+      <svg class="flow-svg" id="flowSvg" viewBox="0 0 440 254" role="img" aria-label="Shema pretoka energije: sonce, sončna elektrarna, razsmernik, hranilnik, dom, polnilnica in omrežje">
+        <defs>
+          <linearGradient id="gSun" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb52e"/><stop offset="1" stop-color="#ff5f2e"/></linearGradient>
+          <linearGradient id="gVolt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14e0a0"/><stop offset="1" stop-color="#00a97a"/></linearGradient>
+          <radialGradient id="gSunGlow"><stop offset="0" stop-color="#ffb52e" stop-opacity=".75"/><stop offset="1" stop-color="#ffb52e" stop-opacity="0"/></radialGradient>
+          <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+        </defs>
+
+        <!-- sun -->
+        <g id="sunGroup">
+          <circle cx="70" cy="30" r="30" fill="url(#gSunGlow)"/>
+          <circle cx="70" cy="30" r="11" fill="url(#gSun)"/>
+          <g stroke="url(#gSun)" stroke-width="2.4" stroke-linecap="round">
+            <path d="M70 12v-6M70 54v-6M48 30h-6M98 30h-6M55 15l-4-4M89 49l4 4M85 15l4-4M55 45l-4 4"/>
+          </g>
+          <g id="rays" stroke="#ffb52e" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 7" opacity=".85">
+            <path d="M58 44 46 62" class="ray"/><path d="M70 46 68 64" class="ray"/><path d="M84 44 92 62" class="ray"/>
+          </g>
+        </g>
+
+        <!-- nodes -->
+        <g id="nPaneli" class="flow-node">
+          <rect class="node-box" x="24" y="72" width="92" height="46" rx="12"/>
+          <path d="M52 84h22l5 11H47z" fill="url(#gSun)" opacity=".9"/>
+          <text class="node-lab" x="70" y="107" text-anchor="middle">Elektrarna</text>
+          <text class="node-val" id="vPaneli" x="70" y="116" text-anchor="middle" fill="#ffb52e" font-size="8.5">6,2 kW</text>
+        </g>
+
+        <g id="nInv" class="flow-node">
+          <rect class="node-box" x="174" y="72" width="92" height="46" rx="12"/>
+          <text class="node-lab" x="220" y="92" text-anchor="middle">Razsmernik</text>
+          <text class="node-lab" x="220" y="103" text-anchor="middle" opacity=".65">hibridni</text>
+          <circle cx="220" cy="111" r="3" fill="#14e0a0"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></circle>
+        </g>
+
+        <g id="nGrid" class="flow-node">
+          <rect class="node-box" x="324" y="72" width="92" height="46" rx="12"/>
+          <text class="node-lab" x="370" y="93" text-anchor="middle">Omrežje</text>
+          <text class="node-val" id="vGrid" x="370" y="106" text-anchor="middle" fill="#4da3ff" font-size="8.5">oddaja 1,4 kW</text>
+        </g>
+
+        <g id="nBat" class="flow-node">
+          <rect class="node-box" x="24" y="198" width="92" height="46" rx="12"/>
+          <text class="node-lab" x="70" y="214" text-anchor="middle">Hranilnik</text>
+          <rect x="44" y="219" width="52" height="11" rx="4" fill="none" stroke="var(--line)" stroke-width="1"/>
+          <rect id="batFill" x="46" y="221" width="34" height="7" rx="3" fill="#14e0a0"/>
+          <text class="node-val" id="vBat" x="70" y="240" text-anchor="middle" fill="#14e0a0" font-size="8.5">68 %</text>
+        </g>
+
+        <g id="nHouse" class="flow-node">
+          <rect class="node-box" x="174" y="198" width="92" height="46" rx="12"/>
+          <path d="M211 218l9-7 9 7v8h-18z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" opacity=".75"/>
+          <text class="node-val" id="vHouse" x="220" y="239" text-anchor="middle" fill="currentColor" font-size="8.5">0,8 kW</text>
+        </g>
+
+        <g id="nEv" class="flow-node">
+          <rect class="node-box" x="324" y="198" width="92" height="46" rx="12"/>
+          <text class="node-lab" x="370" y="217" text-anchor="middle">Polnilnica</text>
+          <text class="node-val" id="vEv" x="370" y="232" text-anchor="middle" fill="#14e0a0" font-size="8.5">4,0 kW</text>
+        </g>
+
+        <!-- povezave -->
+        <g stroke-linecap="round">
+          <path id="ePv"    class="flow-path" stroke="var(--line)" d="M116 95H174"/>
+          <path id="eGrid"  class="flow-path" stroke="var(--line)" d="M266 95H324"/>
+          <path id="eBat"   class="flow-path" stroke="var(--line)" d="M186 118C150 150 110 168 82 190"/>
+          <path id="eHouse" class="flow-path" stroke="var(--line)" d="M220 118V198"/>
+          <path id="eEv"    class="flow-path" stroke="var(--line)" d="M254 118C290 150 330 168 358 190"/>
+
+          <path id="fPv"    class="flow-dash" stroke="#ffb52e" d="M116 95H174"/>
+          <path id="fGrid"  class="flow-dash" stroke="#4da3ff" d="M266 95H324"/>
+          <path id="fBat"   class="flow-dash" stroke="#14e0a0" d="M186 118C150 150 110 168 82 190"/>
+          <path id="fHouse" class="flow-dash" stroke="#ffb52e" d="M220 118V198"/>
+          <path id="fEv"    class="flow-dash" stroke="#14e0a0" d="M254 118C290 150 330 168 358 190"/>
+        </g>
+      </svg>
+
+      <div class="flow-readout">
+        <div class="ro sun"><span>Proizvodnja</span><b id="roProd">6,2 kW</b></div>
+        <div class="ro volt"><span>Hranilnik</span><b id="roBat">+2,0 kW</b></div>
+        <div class="ro sky"><span>Omrežje</span><b id="roGrid">−1,4 kW</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ STRIP ============================ -->
+<div class="strip" aria-hidden="true">
+  <div class="strip-track" id="stripTrack"></div>
+</div>
+
+<!-- ============================ RESITVE ============================ -->
+<section class="sect" id="resitve">
+  <div class="wrap">
+    <div class="sect-head rv">
+      <p class="kicker">Kaj delamo</p>
+      <h2>Celovite energetske rešitve — od strehe do priključka za avto</h2>
+      <p>Ena ekipa pokrije vse: svetovanje, projekt, dobavo opreme, montažo, meritve, zagon in prijavo. Brez usklajevanja treh izvajalcev in brez prelaganja odgovornosti.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card rv" style="--accent:var(--sun)">
+        <span class="card-n">01</span>
+        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18h16l-2-9H6z"/><path d="M8.6 9 8 18M15.4 9l.6 9M5 13.5h14"/><path d="M12 2v3M5 5l1.8 1.8M19 5l-1.8 1.8"/></svg></div>
+        <h3>Sončne elektrarne na ključ</h3>
+        <p>Za stanovanjske hiše in poslovne objekte. Dimenzioniranje glede na vašo dejansko porabo, ne glede na velikost strehe.</p>
+        <ul><li>Ogled, meritve in 3D razporeditev modulov</li><li>Montaža na strehe vseh tipov</li><li>Prijava, zagon in nadzor prek aplikacije</li></ul>
+        <a class="card-more" href="#soncne">Več o elektrarnah <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <article class="card rv rv-d1" style="--accent:var(--volt)">
+        <span class="card-n">02</span>
+        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="15" height="11" rx="2.5"/><path d="M21 11v3"/><path d="M11 9.5 8.5 13H11l-.6 2.6L13.5 12H11l.6-2.5Z"/></svg></div>
+        <h3>Baterijski hranilniki</h3>
+        <p>Presežek dneva shranite za večer. Višja samooskrba, nižja obremenitev omrežja in rezervno napajanje ob izpadu.</p>
+        <ul><li>Enofazni in trifazni sistemi</li><li>Modularno — kapaciteto dodate kasneje</li><li>Rezervno napajanje izbranih tokokrogov (EPS)</li></ul>
+        <a class="card-more" href="#soncne">Kako deluje <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <article class="card rv rv-d2" style="--accent:var(--volt)">
+        <span class="card-n">03</span>
+        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="11" height="18" rx="3"/><path d="M16 8h2.5A1.5 1.5 0 0 1 20 9.5V15a1.6 1.6 0 0 1-3.2 0V13"/><path d="M11 7.5 9 11h2.2l-.6 3L13 10.5h-2.2Z"/></svg></div>
+        <h3>Električne polnilnice</h3>
+        <p>Polnilnice za dom, podjetja in parkirišča — z aplikacijo, dinamičnim upravljanjem moči in povezavo s sončno elektrarno.</p>
+        <ul><li>AC in DC polnilnice, 7,4 – 22 kW in več</li><li>Polnjenje s presežki elektrarne</li><li>Obračun po uporabniku za podjetja</li></ul>
+        <a class="card-more" href="#polnilnice">Več o polnilnicah <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <article class="card rv rv-d3" style="--accent:var(--sky)">
+        <span class="card-n">04</span>
+        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V8l8-5 8 5v12"/><path d="M9 20v-6h6v6"/><path d="M12 8.5v2M12 13v-.5"/></svg></div>
+        <h3>Električne inštalacije</h3>
+        <p>Novogradnje, obnove in dograditve — za hiše in poslovne objekte. Čisto izvedeno, pravilno označeno, dokumentirano.</p>
+        <ul><li>Močnostne in šibkotočne inštalacije</li><li>Razdelilne omarice in prenove</li><li>Pametno vodenje razsvetljave in porabnikov</li></ul>
+        <a class="card-more" href="#kontakt">Povpraševanje <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <article class="card rv rv-d4" style="--accent:var(--sky)">
+        <span class="card-n">05</span>
+        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 12 16 8.6"/><path d="M12 3.5V5M20.5 12H19M12 20.5V19M3.5 12H5"/></svg></div>
+        <h3>Električne meritve</h3>
+        <p>Periodične in prve meritve z merilnimi poročili, ki zdržijo pregled — pogoj za varno obratovanje in zavarovalnino.</p>
+        <ul><li>Meritve zaščite pred udarom</li><li>Meritve strelovodne napeljave</li><li>Merilna poročila in odprava pomanjkljivosti</li></ul>
+        <a class="card-more" href="#kontakt">Naročite meritve <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <article class="card rv rv-d5" style="--accent:var(--sun)">
+        <span class="card-n">06</span>
+        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="11" rx="2.5"/><path d="M7 9.5h10M7 12.5h6"/><path d="M8 19v1.5M16 19v1.5M12 19v1.5"/></svg></div>
+        <h3>Toplotne črpalke</h3>
+        <p>Ogrevanje, ki se odlično ujame s sončno elektrarno — pozimi greje, poleti hladi, energijo pa jemlje s strehe.</p>
+        <ul><li>Izbira moči glede na objekt</li><li>Vgradnja in zagon</li><li>Usklajeno delovanje s hranilnikom</li></ul>
+        <a class="card-more" href="#kontakt">Svetovanje <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <article class="card rv rv-d6" style="--accent:var(--sky)">
+        <span class="card-n">07</span>
+        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9.5 16.5 12 13l2.5 3.5M9.5 16.5h5"/></svg></div>
+        <h3>Energetske izkaznice</h3>
+        <p>Izdelava energetskih izkaznic za stavbe — hitro, pravilno in s pojasnilom, kaj rezultat dejansko pomeni.</p>
+        <ul><li>Za prodajo ali oddajo nepremičnine</li><li>Priporočila za izboljšave</li><li>Vpis v uradni register</li></ul>
+        <a class="card-more" href="#kontakt">Naročilo izkaznice <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SONCNE ELEKTRARNE ============================ -->
+<section class="sect" id="soncne" style="--accent:var(--sun)">
+  <div class="wrap pillar">
+    <div class="pillar-copy rv">
+      <p class="kicker">Sončne elektrarne</p>
+      <h2 style="font-size:clamp(1.9rem,4.3vw,var(--t-3xl));margin-top:1rem">Elektrika, ki jo pridelate sami, je vedno najcenejša</h2>
+      <p style="margin-top:1.1rem;color:var(--ink-2);font-size:var(--t-md);line-height:1.74">
+        Elektrarno dimenzioniramo po vašem odjemnem diagramu in navadah, ne po katalogu. Dodamo hranilnik, da sonce iz opoldneva porabite zvečer, in razsmernik, ki zna vse tri — streho, baterijo in avto — voditi kot en sistem.
+      </p>
+
+      <div class="feat-list">
+        <div class="feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9 11l4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
+          <div><h4>Dimenzioniranje po dejanski porabi</h4><p>Pogledamo 15-minutne podatke odjema in predlagamo moč, ki se najhitreje povrne — ne največje, ki gre na streho.</p></div>
+        </div>
+        <div class="feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="13" rx="2.5"/><path d="M8 21h8M12 17v4"/><path d="m8.5 12 2.5-3 2 2.2L16 8"/></svg></div>
+          <div><h4>Nadzor v aplikaciji</h4><p>Proizvodnja, poraba, stanje hranilnika in polnjenje avta na enem zaslonu — v realnem času in za nazaj.</p></div>
+        </div>
+        <div class="feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6.2v5.1c0 4.5 3.1 8.6 7.5 9.7 4.4-1.1 7.5-5.2 7.5-9.7V6.2Z"/><path d="m9.2 12.2 2 2 3.6-4"/></svg></div>
+          <div><h4>Varna montaža in preverjena oprema</h4><p>Nosilne konstrukcije po tipu kritine, prenapetostna zaščita, urejena DC stran in dokumentacija za zavarovalnico.</p></div>
+        </div>
+        <div class="feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v13H4z"/><path d="M4 11h16M9 4v4M15 4v4"/></svg></div>
+          <div><h4>Papirologijo uredimo mi</h4><p>Soglasja, prijava priključitve, meritve in zagon. Vi podpišete, ostalo speljemo do delujoče elektrarne.</p></div>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat"><b class="count" data-to="1050" data-suffix=" kWh">0</b><span>letna proizvodnja na 1 kWp*</span></div>
+        <div class="stat"><b class="count" data-to="25" data-suffix=" let">0</b><span>garancija na moč modulov*</span></div>
+        <div class="stat v"><b class="count" data-to="80" data-suffix=" %">0</b><span>samooskrba s hranilnikom*</span></div>
+      </div>
+      <p class="disclaim" style="margin-top:.9rem">*Okvirne vrednosti za dobro orientirano streho v Sloveniji; končne številke določi ogled in izbrana oprema.</p>
+    </div>
+
+    <div class="pillar-media rv rv-d2">
+      <svg viewBox="0 0 440 340" role="img" aria-label="Ilustracija hiše s sončno elektrarno na strehi">
+        <defs>
+          <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb52e" stop-opacity=".22"/><stop offset="1" stop-color="#14e0a0" stop-opacity="0"/></linearGradient>
+          <linearGradient id="panelG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1b3550"/><stop offset="1" stop-color="#0b1a28"/></linearGradient>
+          <linearGradient id="shineG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          <clipPath id="roofClip"><path d="M60 170 220 78l160 92-160 92z"/></clipPath>
+        </defs>
+        <rect width="440" height="340" fill="url(#skyG)"/>
+        <circle cx="360" cy="58" r="26" fill="#ffb52e" opacity=".9"/>
+        <circle cx="360" cy="58" r="46" fill="#ffb52e" opacity=".14"/>
+        <!-- ground -->
+        <ellipse cx="220" cy="300" rx="170" ry="26" fill="#000" opacity=".25"/>
+        <!-- house body -->
+        <path d="M100 196v72l120 46V242z" fill="#0d1d2b" stroke="rgba(255,255,255,.09)"/>
+        <path d="M340 196v72l-120 46V242z" fill="#122636" stroke="rgba(255,255,255,.09)"/>
+        <rect x="132" y="228" width="30" height="26" rx="3" fill="#ffb52e" opacity=".55"/>
+        <rect x="262" y="246" width="34" height="42" rx="3" fill="#14e0a0" opacity=".28"/>
+        <!-- roof -->
+        <path d="M60 170 220 78l160 92-160 92z" fill="#0a1622" stroke="rgba(255,255,255,.12)"/>
+        <g clip-path="url(#roofClip)">
+          <g id="panelGroup"></g>
+          <rect id="shine" x="-200" y="60" width="120" height="240" fill="url(#shineG)" opacity=".5" transform="skewX(-28)"/>
+        </g>
+        <!-- inverter + battery -->
+        <rect x="330" y="240" width="34" height="46" rx="6" fill="#0f2130" stroke="rgba(255,255,255,.12)"/>
+        <circle cx="347" cy="252" r="3" fill="#14e0a0"><animate attributeName="opacity" values="1;.25;1" dur="1.8s" repeatCount="indefinite"/></circle>
+        <rect x="336" y="260" width="22" height="18" rx="3" fill="#14e0a0" opacity=".25"/>
+      </svg>
+      <span class="media-tag"><i class="pulse-dot" style="background:var(--sun)"></i> proizvodnja v teku</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ POLNILNICE ============================ -->
+<section class="sect" id="polnilnice" style="--accent:var(--volt);background:var(--bg-2);border-block:1px solid var(--line-soft)">
+  <div class="wrap pillar rev">
+    <div class="pillar-copy rv">
+      <p class="kicker">Električne polnilnice</p>
+      <h2 style="font-size:clamp(1.9rem,4.3vw,var(--t-3xl));margin-top:1rem">Doma napolnite ceneje, kot se ustavite na poti</h2>
+      <p style="margin-top:1.1rem;color:var(--ink-2);font-size:var(--t-md);line-height:1.74">
+        Polnilnico vežemo na vaš sistem: kadar sonce dela, avto polni s presežki; kadar ne, dinamično upravljanje pazi, da ne izbije glavne varovalke. Za podjetja dodamo uporabniške kartice, aplikacijo in obračun po polnjenju.
+      </p>
+
+      <div class="feat-list">
+        <div class="feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11l-.8 8.5 8.8-11.8H12.4Z"/></svg></div>
+          <div><h4>Polnjenje s presežki elektrarne</h4><p>Polnilnica spremlja proizvodnjo in moč sproti prilagaja, da v avto steče energija, ki bi sicer odšla v omrežje.</p></div>
+        </div>
+        <div class="feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="4"/></svg></div>
+          <div><h4>Dinamično upravljanje moči</h4><p>Meritev na glavnem dovodu pove polnilnici, koliko toka je še na voljo. Pečica, toplotna črpalka in avto sobivajo brez izpadov.</p></div>
+        </div>
+        <div class="feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/></svg></div>
+          <div><h4>Aplikacija, kartice in obračun</h4><p>Zgodovina polnjenj, omejitve dostopa, urnik po nižji tarifi in izpis porabe po uporabniku — uporabno za službena vozila.</p></div>
+        </div>
+        <div class="feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M5 20V9l7-5 7 5v11"/><path d="M10 20v-5h4v5"/></svg></div>
+          <div><h4>Za dom, podjetja in parkirišča</h4><p>Od ene stenske enote v garaži do več polnilnih mest s skupnim upravljanjem moči in pripravo na širitev.</p></div>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat v"><b class="count" data-to="22" data-suffix=" kW">0</b><span>moč AC polnilnice do</span></div>
+        <div class="stat v"><b class="count" data-to="15" data-prefix="~" data-suffix=" km">0</b><span>dosega na kWh*</span></div>
+        <div class="stat"><b class="count" data-to="3" data-suffix="×">0</b><span>cenejše kot javna hitra polnilnica*</span></div>
+      </div>
+      <p class="disclaim" style="margin-top:.9rem">*Odvisno od vozila, tarife in deleža polnjenja s sončno elektrarno. Natančno izračunamo na ogledu.</p>
+    </div>
+
+    <div class="pillar-media rv rv-d2">
+      <svg viewBox="0 0 440 340" role="img" aria-label="Ilustracija električne polnilnice, ki polni avtomobil">
+        <defs>
+          <linearGradient id="evG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14e0a0" stop-opacity=".25"/><stop offset="1" stop-color="#4da3ff" stop-opacity="0"/></linearGradient>
+          <linearGradient id="carG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16324a"/><stop offset="1" stop-color="#0a1724"/></linearGradient>
+        </defs>
+        <rect width="440" height="340" fill="url(#evG)"/>
+        <!-- floor -->
+        <ellipse cx="240" cy="268" rx="165" ry="24" fill="#000" opacity=".3"/>
+        <g opacity=".5" stroke="rgba(255,255,255,.14)">
+          <path d="M40 300h360M75 268h330"/>
+        </g>
+
+        <!-- charger post -->
+        <rect x="56" y="118" width="62" height="150" rx="16" fill="#0e2233" stroke="rgba(255,255,255,.14)"/>
+        <rect x="68" y="132" width="38" height="46" rx="8" fill="#061018" stroke="rgba(20,224,160,.35)"/>
+        <text x="87" y="154" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#14e0a0" id="evKw">11,0</text>
+        <text x="87" y="168" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="#14e0a0" opacity=".7">kW</text>
+        <circle cx="87" cy="192" r="5" fill="#14e0a0"><animate attributeName="opacity" values="1;.3;1" dur="1.4s" repeatCount="indefinite"/></circle>
+        <rect x="70" y="206" width="34" height="4" rx="2" fill="rgba(255,255,255,.12)"/>
+        <rect x="70" y="216" width="22" height="4" rx="2" fill="rgba(255,255,255,.12)"/>
+
+        <!-- cable -->
+        <path id="cable" d="M118 196c40 0 46 34 74 34" fill="none" stroke="#14e0a0" stroke-width="5" stroke-linecap="round" opacity=".85"/>
+        <path d="M118 196c40 0 46 34 74 34" fill="none" stroke="#dffff4" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="4 14" class="flow-dash" style="animation-duration:1.4s"/>
+
+        <!-- car -->
+        <g>
+          <path d="M188 232c0-10 8-16 18-18l22-30c4-6 10-9 17-9h44c8 0 15 4 19 11l14 28c14 3 22 9 22 18v14c0 5-4 9-9 9H197c-5 0-9-4-9-9z" fill="url(#carG)" stroke="rgba(255,255,255,.14)"/>
+          <path d="M214 214l16-22c3-4 7-6 12-6h38c6 0 11 3 14 8l11 20z" fill="#0b2b3f" opacity=".85"/>
+          <circle cx="232" cy="256" r="18" fill="#060f18" stroke="rgba(255,255,255,.16)"/>
+          <circle cx="232" cy="256" r="7" fill="#16324a"/>
+          <circle cx="330" cy="256" r="18" fill="#060f18" stroke="rgba(255,255,255,.16)"/>
+          <circle cx="330" cy="256" r="7" fill="#16324a"/>
+          <rect x="192" y="224" width="12" height="7" rx="3" fill="#14e0a0" opacity=".8"/>
+        </g>
+
+        <!-- battery HUD -->
+        <g transform="translate(266,96)">
+          <rect x="0" y="0" width="128" height="52" rx="14" fill="rgba(6,16,24,.82)" stroke="rgba(255,255,255,.14)"/>
+          <text x="14" y="21" font-family="JetBrains Mono,monospace" font-size="8" fill="#7d92a4" letter-spacing="1.4">BATERIJA VOZILA</text>
+          <rect x="14" y="28" width="76" height="12" rx="5" fill="rgba(255,255,255,.1)"/>
+          <rect id="evFill" x="16" y="30" width="20" height="8" rx="4" fill="#14e0a0"/>
+          <text id="evPct" x="100" y="38" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" fill="#14e0a0">34 %</text>
+        </g>
+      </svg>
+      <span class="media-tag"><i class="pulse-dot" style="background:var(--volt)"></i> polnjenje v teku</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ IZRACUN ============================ -->
+<section class="sect" id="izracun">
+  <div class="wrap">
+    <div class="sect-head center rv">
+      <p class="kicker">Informativni izračun</p>
+      <h2>Koliko vam prihrani sonce — in koliko polnjenje doma</h2>
+      <p>Premaknite drsnike in takoj vidite red velikosti. Izračun je informativen; natančnega pripravimo po ogledu in pregledu vaše porabe.</p>
+    </div>
+
+    <div class="calc rv rv-d1">
+      <div class="calc-tabs" role="tablist" aria-label="Izberite izračun">
+        <button role="tab" id="tabPv" aria-selected="true" aria-controls="panePv">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>
+          Sončna elektrarna
+        </button>
+        <button role="tab" id="tabEv" aria-selected="false" aria-controls="paneEv">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11l-.8 8.5 8.8-11.8H12.4Z"/></svg>
+          Polnjenje avta
+        </button>
+      </div>
+
+      <!-- PV PANE -->
+      <div class="calc-body" id="panePv" role="tabpanel" aria-labelledby="tabPv" style="--acc:var(--sun)">
+        <div class="calc-controls">
+          <div class="ctrl">
+            <label for="rPoraba">Letna poraba elektrike <output id="oPoraba">5.500 kWh</output></label>
+            <input type="range" id="rPoraba" min="2000" max="30000" step="250" value="5500">
+          </div>
+          <div class="ctrl">
+            <label for="rMoc">Moč elektrarne <output id="oMoc">6,0 kWp</output></label>
+            <input type="range" id="rMoc" min="2" max="40" step="0.5" value="6">
+          </div>
+          <div class="ctrl">
+            <label for="rCena">Cena elektrike iz omrežja <output id="oCena">0,17 €/kWh</output></label>
+            <input type="range" id="rCena" min="0.08" max="0.32" step="0.005" value="0.17">
+          </div>
+          <div class="ctrl">
+            <span style="display:block;font-size:var(--t-sm);font-weight:500;color:var(--ink-2);margin-bottom:.6rem">Baterijski hranilnik</span>
+            <div class="chips" role="group" aria-label="Hranilnik">
+              <button class="chip" data-bat="0" aria-pressed="false">Brez</button>
+              <button class="chip" data-bat="10" aria-pressed="true">10 kWh</button>
+              <button class="chip" data-bat="15" aria-pressed="false">15 kWh</button>
+              <button class="chip" data-bat="20" aria-pressed="false">20 kWh</button>
+            </div>
+          </div>
+          <div class="ctrl">
+            <span style="display:block;font-size:var(--t-sm);font-weight:500;color:var(--ink-2);margin-bottom:.6rem">Polnite električni avto?</span>
+            <div class="chips" role="group" aria-label="Električni avto">
+              <button class="chip" data-ev="0" aria-pressed="true">Ne</button>
+              <button class="chip" data-ev="1" aria-pressed="false">Da — večino doma</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-out">
+          <div class="big-out">
+            <span>Ocenjen letni prihranek</span>
+            <b id="oPrihranek">1.020 €</b>
+            <em id="oPokritost">Elektrarna pokrije ~68 % vaše porabe</em>
+          </div>
+          <div>
+            <span style="font-size:var(--t-xs);color:var(--mute)">Delež lastne oskrbe</span>
+            <div class="bar"><i id="barSelf"></i></div>
+          </div>
+          <div class="mini-grid">
+            <div class="mini"><span>Letna proizvodnja</span><b id="oProizvodnja">6.300 kWh</b></div>
+            <div class="mini"><span>Poraba iz omrežja</span><b id="oOmrezje">1.750 kWh</b></div>
+            <div class="mini"><span>Ocena naložbe</span><b id="oNalozba">9.800 €</b></div>
+            <div class="mini"><span>Doba vračila</span><b id="oVracilo">9,6 let</b></div>
+          </div>
+          <p class="disclaim">Predpostavke: specifični donos 1.050 kWh/kWp, odkup presežkov 0,06 €/kWh, ocena naložbe ~1.150 €/kWp in ~450 €/kWh hranilnika. Vrednosti so informativne in ne predstavljajo ponudbe.</p>
+          <a class="btn" href="#kontakt" style="justify-self:start">Želim natančen izračun
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- EV PANE -->
+      <div class="calc-body hidden" id="paneEv" role="tabpanel" aria-labelledby="tabEv" style="--acc:var(--volt)">
+        <div class="calc-controls">
+          <div class="ctrl">
+            <label for="rKm">Prevoženih kilometrov na leto <output id="oKm">15.000 km</output></label>
+            <input type="range" id="rKm" min="3000" max="60000" step="500" value="15000">
+          </div>
+          <div class="ctrl">
+            <label for="rPorabaEv">Poraba vozila <output id="oPorabaEv">18,0 kWh/100 km</output></label>
+            <input type="range" id="rPorabaEv" min="12" max="30" step="0.5" value="18">
+          </div>
+          <div class="ctrl">
+            <label for="rDoma">Delež polnjenja doma <output id="oDoma">80 %</output></label>
+            <input type="range" id="rDoma" min="0" max="100" step="5" value="80">
+          </div>
+          <div class="ctrl">
+            <label for="rSonce">Od tega s sončno elektrarno <output id="oSonce">50 %</output></label>
+            <input type="range" id="rSonce" min="0" max="100" step="5" value="50">
+          </div>
+          <div class="ctrl">
+            <span style="display:block;font-size:var(--t-sm);font-weight:500;color:var(--ink-2);margin-bottom:.6rem">Primerjava z</span>
+            <div class="chips" role="group" aria-label="Primerjava">
+              <button class="chip" data-cmp="bencin" aria-pressed="true">Bencinskim vozilom</button>
+              <button class="chip" data-cmp="javna" aria-pressed="false">Javnim polnjenjem</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-out">
+          <div class="big-out">
+            <span>Ocenjen letni prihranek</span>
+            <b id="evPrihranek">1.240 €</b>
+            <em id="evNote">V primerjavi z bencinskim vozilom (7,0 l/100 km, 1,55 €/l)</em>
+          </div>
+          <div>
+            <span style="font-size:var(--t-xs);color:var(--mute)">Delež kilometrov s sončno energijo</span>
+            <div class="bar v"><i id="barSun"></i></div>
+          </div>
+          <div class="mini-grid">
+            <div class="mini"><span>Letna poraba vozila</span><b id="evKwh">2.700 kWh</b></div>
+            <div class="mini"><span>Strošek polnjenja</span><b id="evStrosek">310 €</b></div>
+            <div class="mini"><span>Cena na 100 km</span><b id="evNa100">2,1 €</b></div>
+            <div class="mini"><span>Primerjalni strošek</span><b id="evRef">1.550 €</b></div>
+          </div>
+          <p class="disclaim">Predpostavke: doma 0,17 €/kWh, javna polnilnica 0,42 €/kWh, sončna energija iz lastne elektrarne 0,06 €/kWh (vrednost izgubljenega odkupa). Informativno.</p>
+          <a class="btn btn-volt" href="#kontakt" style="justify-self:start">Povprašajte po polnilnici
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ POTEK ============================ -->
+<section class="sect" id="potek" style="background:var(--bg-2);border-block:1px solid var(--line-soft)">
+  <div class="wrap">
+    <div class="sect-head rv">
+      <p class="kicker">Kako poteka</p>
+      <h2>Od prvega klica do delujoče elektrarne v šestih korakih</h2>
+      <p>Vsak korak ima znanega nosilca in jasen rezultat. Ve se, kdaj pridemo, kaj naredimo in kaj dobite v roke.</p>
+    </div>
+
+    <div class="steps" id="steps">
+      <article class="step rv">
+        <div class="step-dot">01</div>
+        <div>
+          <h3>Pogovor in pregled porabe</h3>
+          <p>Povejte nam, kaj vas moti na položnici in kaj načrtujete — avto, toplotno črpalko, klimo. Pogledamo vaše odjemne podatke in ocenimo smiselno moč.</p>
+          <span class="step-meta">Brezplačno · 20 minut</span>
+        </div>
+      </article>
+      <article class="step rv">
+        <div class="step-dot">02</div>
+        <div>
+          <h3>Ogled na terenu</h3>
+          <p>Izmerimo streho, preverimo kritino, statiko, razdelilno omarico in pot kablov do mesta polnilnice. Fotografiramo in zabeležimo vse, kar vpliva na ceno.</p>
+          <span class="step-meta">Na lokaciji · 1 ura</span>
+        </div>
+      </article>
+      <article class="step rv">
+        <div class="step-dot">03</div>
+        <div>
+          <h3>Ponudba s tremi scenariji</h3>
+          <p>Prejmete razporeditev modulov, pričakovano proizvodnjo, izračun prihranka in ceno — praviloma v treh različicah, da vidite, kje se vlaganje še splača in kje ne več.</p>
+          <span class="step-meta">V 3–5 delovnih dneh</span>
+        </div>
+      </article>
+      <article class="step rv">
+        <div class="step-dot">04</div>
+        <div>
+          <h3>Dokumentacija in soglasja</h3>
+          <p>Uredimo prijavo, soglasje za priključitev in potrebno dokumentacijo. Vi podpišete, mi pa spremljamo roke in odgovarjamo na zahteve distributerja.</p>
+          <span class="step-meta">Vodimo mi</span>
+        </div>
+      </article>
+      <article class="step rv">
+        <div class="step-dot">05</div>
+        <div>
+          <h3>Montaža</h3>
+          <p>Konstrukcija, moduli, razsmernik, hranilnik in polnilnica. Delo opravi naša ekipa — brez posrednikov, s pospravljenim gradbiščem vsak večer.</p>
+          <span class="step-meta">Tipično 2–4 dni</span>
+        </div>
+      </article>
+      <article class="step rv">
+        <div class="step-dot">06</div>
+        <div>
+          <h3>Meritve, zagon in predaja</h3>
+          <p>Opravimo meritve, izdelamo merilno poročilo, zaženemo sistem in vas naučimo uporabljati aplikacijo. Po predaji ostanemo dosegljivi za vprašanja in servis.</p>
+          <span class="step-meta">Z vso dokumentacijo</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ZAKAJ ============================ -->
+<section class="sect" id="zakaj">
+  <div class="wrap">
+    <div class="sect-head rv">
+      <p class="kicker">Zakaj Sontro</p>
+      <h2>En izvajalec, ena odgovornost</h2>
+      <p>Elektrarna, hranilnik, polnilnica in inštalacije so en sistem. Ko jih postavi ena ekipa, ni iskanja krivca — in sistem dejansko dela skupaj.</p>
+    </div>
+
+    <div class="why rv rv-d1">
+      <div class="why-i"><b class="count" data-to="1" data-suffix="×">0</b><h4>Ena ekipa za vse</h4><p>Elektro inštalacije, elektrarna, hranilnik, polnilnica in meritve — brez podizvajalcev in brez prelaganja.</p></div>
+      <div class="why-i"><b class="count" data-to="15" data-suffix=" min">0</b><h4>Obračun po 15 minutah</h4><p>Sistem nastavimo tako, da gleda konice in ne le letne vsote — tam se danes skriva razlika na položnici.</p></div>
+      <div class="why-i"><b class="count" data-to="100" data-suffix=" %">0</b><h4>Papirologija urejena</h4><p>Soglasja, prijave, merilna poročila in dokumentacija za zavarovalnico. Vse predamo urejeno.</p></div>
+      <div class="why-i"><b class="count" data-to="24" data-suffix="/7">0</b><h4>Nadzor in servis</h4><p>Delovanje spremljate v aplikaciji, ob napaki pa veste, koga poklicati — in dvignemo telefon.</p></div>
+    </div>
+
+    <div class="quotes rv rv-d2" style="margin-top:1.05rem">
+      <figure class="quote">
+        <div class="stars" aria-label="Ocena 5 od 5">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.7z"/></svg>
+        </div>
+        <blockquote><p>Profesionalna in hitra ekipa — pravi strokovnjaki za sončne elektrarne. Vse je bilo izvedeno tako, kot je bilo dogovorjeno.</p></blockquote>
+        <footer><span class="avatar">M</span><div><b>Matej K.</b><span>hišna elektrarna, Savinjska</span></div></footer>
+      </figure>
+      <figure class="quote">
+        <div class="stars" aria-label="Ocena 5 od 5">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.7z"/></svg>
+        </div>
+        <blockquote><p>Vsi zaposleni so strokovni, odzivni in izjemno prijazni. Svetovanje in izvedba na najvišjem nivoju, s celovito podporo tudi po montaži.</p></blockquote>
+        <footer><span class="avatar">A</span><div><b>Andreja P.</b><span>elektrarna s hranilnikom</span></div></footer>
+      </figure>
+      <figure class="quote">
+        <div class="stars" aria-label="Ocena 5 od 5">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.7z"/></svg>
+        </div>
+        <blockquote><p>Polnilnico so povezali s sončno elektrarno, tako da avto polni takrat, ko je energija zastonj. Razliko na položnici se vidi.</p></blockquote>
+        <footer><span class="avatar">B</span><div><b>Boštjan R.</b><span>polnilnica + elektrarna</span></div></footer>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FAQ ============================ -->
+<section class="sect" id="faq" style="background:var(--bg-2);border-block:1px solid var(--line-soft)">
+  <div class="wrap">
+    <div class="sect-head center rv">
+      <p class="kicker">Baza znanja</p>
+      <h2>Pogosta vprašanja</h2>
+      <p>Kratki, pošteni odgovori na tisto, kar nas ljudje najpogosteje vprašajo na prvem sestanku.</p>
+    </div>
+
+    <div class="faq rv rv-d1">
+      <details class="qa">
+        <summary>Kako poteka montaža sončne elektrarne?<span class="plus"></span></summary>
+        <div class="qa-body">Najprej pride ekipa s konstrukcijo in pritrdili, prilagojenimi vaši kritini. Sledi polaganje modulov in DC ožičenje, nato montaža razsmernika in po potrebi hranilnika ter povezava v razdelilno omarico. Ob koncu opravimo meritve, sistem zaženemo in vas naučimo brati podatke v aplikaciji. Pri običajni hiši traja montaža dva do štiri dni.</div>
+      </details>
+      <details class="qa">
+        <summary>Se sončna elektrarna danes še splača?<span class="plus"></span></summary>
+        <div class="qa-body">Da, a pod drugimi pogoji kot nekoč. Ker se obračun izvaja po 15-minutnih intervalih in letnega izravnavanja za nove uporabnike ni več, je ključno, koliko energije porabite takrat, ko jo pridelate. Zato elektrarno dimenzioniramo po vaši dejanski porabi in praviloma dodamo hranilnik — tako se delež lastne oskrbe močno poveča.</div>
+      </details>
+      <details class="qa">
+        <summary>Kaj je hibridna sončna elektrarna?<span class="plus"></span></summary>
+        <div class="qa-body">Hibridna elektrarna ima razsmernik, ki hkrati upravlja proizvodnjo iz modulov, polnjenje in praznjenje baterije ter izmenjavo z omrežjem. Presežek dneva shrani, zvečer ga vrne v hišo, ob izpadu omrežja pa lahko prek funkcije rezervnega napajanja (EPS) ohrani izbrane tokokroge pod napetostjo.</div>
+      </details>
+      <details class="qa">
+        <summary>Kako velik hranilnik potrebujem?<span class="plus"></span></summary>
+        <div class="qa-body">Izhajamo iz večerne in nočne porabe. Pri povprečni hiši s porabo okoli 5.000 kWh letno se najpogosteje izkaže smiseln hranilnik med 10 in 15 kWh. Večji hranilnik pomeni višjo samooskrbo, a se vsaka dodatna kilovatna ura vrne počasneje — zato izračunamo, kje je za vas meja smiselnosti. Sistemi so modularni, zato lahko kapaciteto dodate kasneje.</div>
+      </details>
+      <details class="qa">
+        <summary>Ali lahko polnilnica polni avto samo s presežki elektrarne?<span class="plus"></span></summary>
+        <div class="qa-body">Da. Polnilnica prek meritve na glavnem dovodu ve, koliko energije trenutno ostaja, in moč polnjenja sproti prilagaja. Lahko nastavite način, kjer avto polni izključno s presežki, ali kombiniran način z zagotovljeno minimalno močjo, da je vozilo zjutraj zagotovo napolnjeno.</div>
+      </details>
+      <details class="qa">
+        <summary>Kaj je dinamično upravljanje moči in zakaj ga potrebujem?<span class="plus"></span></summary>
+        <div class="qa-body">Hišni priključek ima omejeno moč. Če se hkrati vklopijo toplotna črpalka, štedilnik in polnilnica, lahko izbije glavna varovalka. Dinamično upravljanje meri porabo celotnega objekta in polnilnici v vsakem trenutku dodeli le toliko moči, kolikor je je na voljo — polnjenje se upočasni namesto izpada.</div>
+      </details>
+      <details class="qa">
+        <summary>Kako dolgo traja od podpisa do delujoče elektrarne?<span class="plus"></span></summary>
+        <div class="qa-body">Montaža je krajši del zgodbe; največ časa vzamejo soglasja in postopki pri distributerju. Realna pričakovanja postavimo ob ponudbi glede na trenutne roke, vmes pa vas obveščamo o vsakem koraku, ne da bi morali klicati in preverjati.</div>
+      </details>
+      <details class="qa">
+        <summary>Katera dela lahko izvedete poleg elektrarne?<span class="plus"></span></summary>
+        <div class="qa-body">Izvajamo električne inštalacije za hiše in poslovne objekte, električne meritve z merilnimi poročili, vgradnjo toplotnih črpalk in baterijskih hranilnikov ter izdelamo energetsko izkaznico. Če že gremo v razdelilno omarico, je smiselno urediti vse naenkrat.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CTA + KONTAKT ============================ -->
+<section class="sect" id="kontakt">
+  <div class="wrap">
+    <div class="band rv">
+      <div class="band-grid" aria-hidden="true"></div>
+      <h2>Povejte nam, kaj vas zanima — odgovor dobite od človeka, ne iz kataloga.</h2>
+      <p>Brezplačen ogled, informativni izračun in ponudba brez obveznosti. Za hiše in poslovne objekte po vsej Sloveniji.</p>
+      <div class="hero-cta">
+        <a class="btn btn-lg" href="tel:+38638915100">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3h3l1.5 4.5-2 1.4a12.5 12.5 0 0 0 6.1 6.1l1.4-2L21 14.5v3a2.5 2.5 0 0 1-2.7 2.5A16.8 16.8 0 0 1 4 5.7 2.5 2.5 0 0 1 6.5 3Z"/></svg>
+          03 891 51 00
+        </a>
+        <a class="btn btn-lg btn-ghost" href="mailto:info@sontro.si">info@sontro.si</a>
+      </div>
+    </div>
+
+    <div class="contact-grid" style="margin-top:clamp(2.5rem,6vw,4.5rem)">
+      <div class="rv">
+        <p class="kicker">Povpraševanje</p>
+        <h2 style="font-size:clamp(1.7rem,3.6vw,2.4rem);margin-top:1rem">Pišite nam</h2>
+        <p style="margin:1rem 0 1.8rem;color:var(--ink-2)">Izpolnite obrazec in javimo se v enem delovnem dnevu. Bolj natančno kot opišete objekt in porabo, bolj konkreten bo prvi odgovor.</p>
+
+        <!-- Obrazec odpre e-poštni odjemalec. Za pravo oddajo zamenjajte handler v JS
+             (npr. action na Formspree/Netlify/lasten backend). -->
+        <form class="form" id="kontaktForm" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="fIme">Ime in priimek *</label>
+              <input id="fIme" name="ime" type="text" autocomplete="name" required placeholder="Janez Novak">
+            </div>
+            <div class="field">
+              <label for="fTel">Telefon *</label>
+              <input id="fTel" name="telefon" type="tel" autocomplete="tel" required placeholder="041 123 456">
+            </div>
+          </div>
+          <div class="field">
+            <label for="fMail">E-pošta *</label>
+            <input id="fMail" name="email" type="email" autocomplete="email" required placeholder="janez@primer.si">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="fStoritev">Zanima me</label>
+              <select id="fStoritev" name="storitev">
+                <option>Sončna elektrarna</option>
+                <option>Sončna elektrarna s hranilnikom</option>
+                <option>Električna polnilnica</option>
+                <option>Elektrarna + polnilnica</option>
+                <option>Električne inštalacije</option>
+                <option>Električne meritve</option>
+                <option>Toplotna črpalka</option>
+                <option>Energetska izkaznica</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="fObjekt">Vrsta objekta</label>
+              <select id="fObjekt" name="objekt">
+                <option>Stanovanjska hiša</option>
+                <option>Poslovni objekt</option>
+                <option>Kmetijsko gospodarstvo</option>
+                <option>Večstanovanjska stavba</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="fSporocilo">Sporočilo</label>
+            <textarea id="fSporocilo" name="sporocilo" placeholder="Kraj objekta, približna letna poraba, tip strehe, ali imate električni avto …"></textarea>
+          </div>
+          <label class="consent">
+            <input type="checkbox" id="fSoglasje" required>
+            <span>Soglašam, da Sontro d.o.o. moje podatke uporabi izključno za pripravo odgovora na to povpraševanje.</span>
+          </label>
+          <button class="btn btn-lg" type="submit" style="justify-self:start">Pošljite povpraševanje
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 16-8-6 16-2.4-6.2z"/></svg>
+          </button>
+          <p class="disclaim" id="formNote" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div class="contact-cards rv rv-d2">
+        <a class="cc" href="tel:+38638915100">
+          <span class="cc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3h3l1.5 4.5-2 1.4a12.5 12.5 0 0 0 6.1 6.1l1.4-2L21 14.5v3a2.5 2.5 0 0 1-2.7 2.5A16.8 16.8 0 0 1 4 5.7 2.5 2.5 0 0 1 6.5 3Z"/></svg></span>
+          <div><span>Telefon</span><b>03 891 51 00</b><p>Pon–pet, 8.00–16.00</p></div>
+        </a>
+        <a class="cc" href="mailto:info@sontro.si">
+          <span class="cc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 5.5L20 7"/></svg></span>
+          <div><span>E-pošta</span><b>info@sontro.si</b><p>Odgovorimo v enem delovnem dnevu</p></div>
+        </a>
+        <a class="cc" href="https://maps.google.com/?q=Podvrh+1,+Braslovče" target="_blank" rel="noopener">
+          <span class="cc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+          <div><span>Naslov</span><b>Podvrh 1, Braslovče</b><p>Savinjska regija · delamo po vsej Sloveniji</p></div>
+        </a>
+        <div class="cc" style="cursor:default">
+          <span class="cc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5l3 2"/></svg></span>
+          <div><span>Odzivni čas</span><b>Ogled v nekaj dneh</b><p>Nujne okvare in servis obravnavamo prednostno</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="#vrh" aria-label="Sontro — na vrh">
+          <svg class="brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <rect width="64" height="64" rx="16" fill="#0d1f2e"/>
+            <path d="M32 11v8M32 45v8M11 32h8M45 32h8M17.5 17.5l5.6 5.6M40.9 40.9l5.6 5.6M46.5 17.5l-5.6 5.6M23.1 40.9l-5.6 5.6" stroke="#ffb52e" stroke-width="3.4" stroke-linecap="round"/>
+            <circle cx="32" cy="32" r="9.5" fill="#14e0a0"/>
+          </svg>
+          <span>Sontro<small>Energetske rešitve</small></span>
+        </a>
+        <p>Sončne elektrarne, baterijski hranilniki, električne polnilnice, inštalacije in meritve. Iz Braslovč za vso Slovenijo.</p>
+        <div class="socials" style="margin-top:1.3rem">
+          <a href="https://www.facebook.com/Sontro.energetskeresitve/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.29-.04-1.27-.12-2.41-.12-2.39 0-4.03 1.46-4.03 4.14V9.9H7.5V13h2.76v8z"/></svg>
+          </a>
+          <a href="mailto:info@sontro.si" aria-label="E-pošta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 5.5L20 7"/></svg>
+          </a>
+          <a href="tel:+38638915100" aria-label="Telefon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3h3l1.5 4.5-2 1.4a12.5 12.5 0 0 0 6.1 6.1l1.4-2L21 14.5v3a2.5 2.5 0 0 1-2.7 2.5A16.8 16.8 0 0 1 4 5.7 2.5 2.5 0 0 1 6.5 3Z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h5>Storitve</h5>
+        <ul>
+          <li><a href="#soncne">Sončne elektrarne</a></li>
+          <li><a href="#soncne">Baterijski hranilniki</a></li>
+          <li><a href="#polnilnice">Električne polnilnice</a></li>
+          <li><a href="#resitve">Električne inštalacije</a></li>
+          <li><a href="#resitve">Električne meritve</a></li>
+          <li><a href="#resitve">Toplotne črpalke</a></li>
+          <li><a href="#resitve">Energetske izkaznice</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>Za koga</h5>
+        <ul>
+          <li><a href="#soncne">Stanovanjske hiše</a></li>
+          <li><a href="#soncne">Poslovni objekti</a></li>
+          <li><a href="#polnilnice">Podjetja s službenimi vozili</a></li>
+          <li><a href="#polnilnice">Parkirišča in garaže</a></li>
+          <li><a href="#izracun">Izračun prihranka</a></li>
+          <li><a href="#faq">Baza znanja</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>Kontakt</h5>
+        <ul>
+          <li><a href="tel:+38638915100">03 891 51 00</a></li>
+          <li><a href="mailto:info@sontro.si">info@sontro.si</a></li>
+          <li><a href="https://maps.google.com/?q=Podvrh+1,+Braslovče" target="_blank" rel="noopener">Podvrh 1, Braslovče</a></li>
+          <li style="color:var(--mute);font-size:var(--t-sm)">Pon–pet, 8.00–16.00</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <p>© <span id="leto">2026</span> Sontro d.o.o. · Vse pravice pridržane.</p>
+      <p>Izdelano z mislijo na sonce ☀ in kilometre ⚡</p>
+    </div>
+  </div>
+</footer>
+
+<button class="totop" id="toTop" aria-label="Na vrh strani">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"ElectricalContractor",
+  "name":"Sontro d.o.o.",
+  "description":"Sončne elektrarne, baterijski hranilniki, električne polnilnice, električne inštalacije in meritve.",
+  "url":"https://www.sontro.si/",
+  "telephone":"+386 3 891 51 00",
+  "email":"info@sontro.si",
+  "address":{"@type":"PostalAddress","streetAddress":"Podvrh 1","addressLocality":"Braslovče","addressCountry":"SI"},
+  "areaServed":{"@type":"Country","name":"Slovenija"},
+  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"16:00"}],
+  "sameAs":["https://www.facebook.com/Sontro.energetskeresitve/"],
+  "hasOfferCatalog":{
+    "@type":"OfferCatalog","name":"Storitve",
+    "itemListElement":[
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Sončna elektrarna na ključ"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Baterijski hranilniki"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Električne polnilnice"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Električne inštalacije"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Električne meritve"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Toplotne črpalke"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Energetske izkaznice"}}
+    ]
+  }
+}
+</script>
+
+<script>
+(() => {
+"use strict";
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const nf = (n, d = 0) => new Intl.NumberFormat("sl-SI", {minimumFractionDigits: d, maximumFractionDigits: d}).format(n);
+
+/* ---------------- tema ---------------- */
+const root = document.documentElement;
+const stored = (() => { try { return localStorage.getItem("sontro-theme"); } catch { return null; } })();
+root.dataset.theme = stored || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+$("#themeBtn").addEventListener("click", () => {
+  root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+  try { localStorage.setItem("sontro-theme", root.dataset.theme); } catch {}
+});
+
+/* ---------------- leto ---------------- */
+$("#leto").textContent = new Date().getFullYear();
+
+/* ---------------- nav: stuck, progress, scrollspy ---------------- */
+const nav = $("#nav"), progress = $("#progress"), toTop = $("#toTop");
+const sections = ["resitve","soncne","polnilnice","izracun","potek","faq"].map(id => $("#" + id)).filter(Boolean);
+const navLinks = $$("#navLinks a");
+let ticking = false;
+function onScroll() {
+  const y = window.scrollY;
+  nav.classList.toggle("is-stuck", y > 18);
+  toTop.classList.toggle("show", y > 800);
+  const max = document.documentElement.scrollHeight - innerHeight;
+  progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+
+  let current = "";
+  for (const s of sections) if (s.getBoundingClientRect().top <= innerHeight * 0.35) current = s.id;
+  navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + current));
+  ticking = false;
+}
+addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, {passive: true});
+onScroll();
+toTop.addEventListener("click", () => scrollTo({top: 0, behavior: reduce ? "auto" : "smooth"}));
+
+/* ---------------- mobilni meni ---------------- */
+const drawer = $("#drawer"), burger = $("#burger");
+const setDrawer = open => {
+  drawer.classList.toggle("open", open);
+  burger.setAttribute("aria-expanded", String(open));
+  document.body.style.overflow = open ? "hidden" : "";
+  if (open) $$("#drawer a").forEach((a, i) => a.style.transitionDelay = `${0.05 + i * 0.045}s`);
+};
+burger.addEventListener("click", () => setDrawer(true));
+$("#drawerClose").addEventListener("click", () => setDrawer(false));
+$$("#drawer a").forEach(a => a.addEventListener("click", () => setDrawer(false)));
+addEventListener("keydown", e => { if (e.key === "Escape") setDrawer(false); });
+
+/* ---------------- reveal ---------------- */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+}, {rootMargin: "0px 0px -8% 0px", threshold: 0.12});
+$$(".rv, .step").forEach(el => io.observe(el));
+
+/* ---------------- števci ---------------- */
+const counters = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, to = parseFloat(el.dataset.to), pre = el.dataset.prefix || "", suf = el.dataset.suffix || "";
+    const dur = reduce ? 0 : 1250, t0 = performance.now();
+    const tick = t => {
+      const p = dur ? Math.min(1, (t - t0) / dur) : 1;
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = pre + nf(Math.round(to * eased)) + suf;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    counters.unobserve(el);
+  });
+}, {threshold: 0.5});
+$$(".count").forEach(el => counters.observe(el));
+
+/* ---------------- kartice: sledenje kazalcu ---------------- */
+$$(".card").forEach(card => {
+  card.addEventListener("pointermove", e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    card.style.setProperty("--my", `${e.clientY - r.top}px`);
+  });
+});
+
+/* ---------------- trak ---------------- */
+const stripItems = ["Sončne elektrarne na ključ","Baterijski hranilniki","Električne polnilnice","Dinamično upravljanje moči","Električne inštalacije","Električne meritve","Toplotne črpalke","Energetske izkaznice","Nadzor prek aplikacije","Rezervno napajanje (EPS)"];
+const bolt = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-.8 8.5 8.8-11.8H12.4Z"/></svg>`;
+$("#stripTrack").innerHTML = [...stripItems, ...stripItems].map(t => `<span class="strip-i">${bolt}${t}</span>`).join("");
+
+/* ---------------- hero canvas: fotoni ---------------- */
+const cv = $("#heroCanvas");
+if (cv && !reduce) {
+  const ctx = cv.getContext("2d");
+  let w, h, dots = [], dpr = Math.min(devicePixelRatio || 1, 2), raf;
+  const resize = () => {
+    w = cv.clientWidth; h = cv.clientHeight;
+    cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = Math.round(Math.min(90, (w * h) / 16000));
+    dots = Array.from({length: count}, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .22, vy: -0.12 - Math.random() * .3,
+      r: Math.random() * 1.8 + .6, a: Math.random() * .5 + .18,
+      c: Math.random() > .55 ? "255,181,46" : "20,224,160"
+    }));
+  };
+  const draw = () => {
+    ctx.clearRect(0, 0, w, h);
+    for (const d of dots) {
+      d.x += d.vx; d.y += d.vy;
+      if (d.y < -10) { d.y = h + 10; d.x = Math.random() * w; }
+      if (d.x < -10) d.x = w + 10; else if (d.x > w + 10) d.x = -10;
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${d.c},${d.a})`;
+      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    raf = requestAnimationFrame(draw);
+  };
+  resize(); draw();
+  addEventListener("resize", () => { cancelAnimationFrame(raf); resize(); draw(); }, {passive: true});
+}
+
+/* ---------------- shema pretoka energije ---------------- */
+const flow = {
+  day: {
+    caption: "SONČEN DAN · 13:20",
+    pv: "6,2 kW", grid: "oddaja 1,4 kW", house: "0,8 kW", ev: "4,0 kW", bat: "68 %", batW: 34,
+    prod: "6,2 kW", batRo: "+2,0 kW", gridRo: "−1,4 kW",
+    on: ["fPv","fHouse","fEv","fGrid","fBat"], reverse: [], dim: [], houseStroke: "#ffb52e"
+  },
+  night: {
+    caption: "NOČ · 22:40",
+    pv: "0,0 kW", grid: "odjem 0,3 kW", house: "1,1 kW", ev: "2,2 kW", bat: "41 %", batW: 21,
+    prod: "0,0 kW", batRo: "−3,0 kW", gridRo: "+0,3 kW",
+    on: ["fHouse","fEv","fBat","fGrid"], reverse: ["fBat"], dim: ["nPaneli","fPv","sunGroup"], houseStroke: "#14e0a0"
+  }
+};
+const flowEls = {
+  cap: $("#flowCaption"), pv: $("#vPaneli"), grid: $("#vGrid"), house: $("#vHouse"),
+  ev: $("#vEv"), bat: $("#vBat"), batFill: $("#batFill"),
+  prod: $("#roProd"), batRo: $("#roBat"), gridRo: $("#roGrid")
+};
+const allDash = ["fPv","fGrid","fBat","fHouse","fEv"];
+function setFlow(mode) {
+  const s = flow[mode];
+  flowEls.cap.textContent = s.caption;
+  flowEls.pv.textContent = s.pv; flowEls.grid.textContent = s.grid;
+  flowEls.house.textContent = s.house; flowEls.ev.textContent = s.ev;
+  flowEls.bat.textContent = s.bat; flowEls.batFill.setAttribute("width", s.batW);
+  flowEls.prod.textContent = s.prod; flowEls.batRo.textContent = s.batRo; flowEls.gridRo.textContent = s.gridRo;
+
+  allDash.forEach(id => {
+    const el = $("#" + id); if (!el) return;
+    const on = s.on.includes(id);
+    el.style.opacity = on ? "1" : "0";
+    el.style.animationDirection = s.reverse.includes(id) ? "reverse" : "normal";
+  });
+  $("#fHouse").setAttribute("stroke", s.houseStroke);
+  ["nPaneli","sunGroup","fPv"].forEach(id => $("#" + id)?.classList.toggle("dimmed", s.dim.includes(id)));
+  $("#modeDay").setAttribute("aria-pressed", String(mode === "day"));
+  $("#modeNight").setAttribute("aria-pressed", String(mode === "night"));
+}
+$("#modeDay").addEventListener("click", () => setFlow("day"));
+$("#modeNight").addEventListener("click", () => setFlow("night"));
+setFlow("day");
+
+/* ---------------- streha: generiranje panelov ---------------- */
+const panelGroup = $("#panelGroup");
+if (panelGroup) {
+  const L = {x: 60, y: 170}, e1 = {x: 160, y: -92}, e2 = {x: 160, y: 92};
+  const pt = (u, v) => `${(L.x + u * e1.x + v * e2.x).toFixed(1)},${(L.y + u * e1.y + v * e2.y).toFixed(1)}`;
+  const cols = 5, rows = 4, gap = 0.016, frag = [];
+  for (let i = 0; i < cols; i++) for (let j = 0; j < rows; j++) {
+    const u0 = i / cols + gap, u1 = (i + 1) / cols - gap;
+    const v0 = j / rows + gap, v1 = (j + 1) / rows - gap;
+    frag.push(`<polygon points="${pt(u0,v0)} ${pt(u1,v0)} ${pt(u1,v1)} ${pt(u0,v1)}" fill="url(#panelG)" stroke="rgba(120,180,255,.3)" stroke-width=".8" opacity="0" style="transition:opacity .55s var(--ease);transition-delay:${(i * rows + j) * 0.045}s"/>`);
+  }
+  panelGroup.innerHTML = frag.join("");
+  const roofIO = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { $$("polygon", panelGroup).forEach(p => p.setAttribute("opacity", ".95")); roofIO.disconnect(); }
+  }), {threshold: 0.25});
+  roofIO.observe(panelGroup.closest("svg"));
+
+  /* odsev po panelih */
+  const shine = $("#shine");
+  if (shine && !reduce) {
+    let x = -200;
+    setInterval(() => {
+      x = x >= 460 ? -200 : x + 8;
+      shine.setAttribute("x", x);
+    }, 32);
+  }
+}
+
+/* ---------------- polnjenje vozila (ilustracija) ---------------- */
+const evFill = $("#evFill"), evPct = $("#evPct"), evKwLab = $("#evKw");
+if (evFill && !reduce) {
+  let pct = 34;
+  setInterval(() => {
+    pct = pct >= 96 ? 22 : pct + 1;
+    evFill.setAttribute("width", (72 * pct / 100).toFixed(1));
+    evPct.textContent = pct + " %";
+    evKwLab.textContent = (pct > 85 ? 6.2 : 11.0).toFixed(1).replace(".", ",");
+  }, 240);
+}
+
+/* ---------------- potek: napredek črte ---------------- */
+const steps = $("#steps");
+if (steps) {
+  const stepEls = $$(".step", steps);
+  const upd = () => {
+    const r = steps.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (innerHeight * 0.72 - r.top) / r.height));
+    steps.style.setProperty("--prog", (p * 100).toFixed(1) + "%");
+    stepEls.forEach(s => {
+      const sr = s.getBoundingClientRect();
+      s.classList.toggle("in", sr.top < innerHeight * 0.72);
+    });
+  };
+  addEventListener("scroll", upd, {passive: true});
+  upd();
+}
+
+/* ---------------- drsniki: barvno polnilo ---------------- */
+const paintRange = el => {
+  const p = (el.value - el.min) / (el.max - el.min) * 100;
+  el.style.setProperty("--fill", p + "%");
+};
+$$("input[type=range]").forEach(el => { paintRange(el); el.addEventListener("input", () => paintRange(el)); });
+
+/* ---------------- kalkulator: zavihka ---------------- */
+const tabPv = $("#tabPv"), tabEv = $("#tabEv"), panePv = $("#panePv"), paneEv = $("#paneEv");
+const selectTab = pv => {
+  tabPv.setAttribute("aria-selected", String(pv));
+  tabEv.setAttribute("aria-selected", String(!pv));
+  panePv.classList.toggle("hidden", !pv);
+  paneEv.classList.toggle("hidden", pv);
+};
+tabPv.addEventListener("click", () => selectTab(true));
+tabEv.addEventListener("click", () => selectTab(false));
+
+/* ---------------- kalkulator: sončna elektrarna ---------------- */
+const PV = {donos: 1050, odkup: 0.06, cenaKwp: 1150, cenaKwh: 450, evPoraba: 2700};
+let batKwh = 10, hasEv = 0;
+const pvEls = {
+  poraba: $("#rPoraba"), moc: $("#rMoc"), cena: $("#rCena"),
+  oPoraba: $("#oPoraba"), oMoc: $("#oMoc"), oCena: $("#oCena"),
+  prihranek: $("#oPrihranek"), pokritost: $("#oPokritost"), bar: $("#barSelf"),
+  proizvodnja: $("#oProizvodnja"), omrezje: $("#oOmrezje"), nalozba: $("#oNalozba"), vracilo: $("#oVracilo")
+};
+function calcPv() {
+  const poraba = +pvEls.poraba.value, moc = +pvEls.moc.value, cena = +pvEls.cena.value;
+  const porabaEff = poraba + (hasEv ? PV.evPoraba : 0);
+  const proizvodnja = moc * PV.donos;
+  const ratio = proizvodnja / Math.max(porabaEff, 1);
+  const direct = Math.min(0.95, 0.32 / Math.max(ratio, 0.2));
+  const presezek = proizvodnja * (1 - direct);
+  const manjko = Math.max(0, porabaEff - proizvodnja * direct);
+  const izBaterije = Math.min(batKwh * 280, presezek, manjko);
+  const lastna = proizvodnja * direct + izBaterije;
+  const uvoz = Math.max(0, porabaEff - lastna);
+  const oddaja = Math.max(0, proizvodnja - lastna);
+  const prihranek = lastna * cena + oddaja * PV.odkup;
+  const nalozba = moc * PV.cenaKwp + batKwh * PV.cenaKwh;
+  const vracilo = prihranek > 0 ? nalozba / prihranek : 0;
+  const delez = Math.min(100, lastna / Math.max(porabaEff, 1) * 100);
+
+  pvEls.oPoraba.textContent = nf(poraba) + " kWh";
+  pvEls.oMoc.textContent = nf(moc, 1) + " kWp";
+  pvEls.oCena.textContent = nf(cena, 3) + " €/kWh";
+  pvEls.prihranek.textContent = nf(Math.round(prihranek)) + " €";
+  pvEls.pokritost.textContent = `Elektrarna pokrije ~${Math.round(delez)} % vaše porabe${hasEv ? " (z avtom)" : ""}`;
+  pvEls.bar.style.width = delez + "%";
+  pvEls.proizvodnja.textContent = nf(Math.round(proizvodnja)) + " kWh";
+  pvEls.omrezje.textContent = nf(Math.round(uvoz)) + " kWh";
+  pvEls.nalozba.textContent = "~" + nf(Math.round(nalozba / 100) * 100) + " €";
+  pvEls.vracilo.textContent = vracilo ? nf(vracilo, 1) + " let" : "—";
+}
+[pvEls.poraba, pvEls.moc, pvEls.cena].forEach(el => el.addEventListener("input", calcPv));
+$$("[data-bat]").forEach(chip => chip.addEventListener("click", () => {
+  $$("[data-bat]").forEach(c => c.setAttribute("aria-pressed", "false"));
+  chip.setAttribute("aria-pressed", "true");
+  batKwh = +chip.dataset.bat; calcPv();
+}));
+$$("[data-ev]").forEach(chip => chip.addEventListener("click", () => {
+  $$("[data-ev]").forEach(c => c.setAttribute("aria-pressed", "false"));
+  chip.setAttribute("aria-pressed", "true");
+  hasEv = +chip.dataset.ev; calcPv();
+}));
+calcPv();
+
+/* ---------------- kalkulator: polnjenje vozila ---------------- */
+const EV = {doma: 0.17, javna: 0.42, sonce: 0.06, bencinL: 7.0, cenaL: 1.55};
+let cmp = "bencin";
+const evEls = {
+  km: $("#rKm"), por: $("#rPorabaEv"), doma: $("#rDoma"), sonce: $("#rSonce"),
+  oKm: $("#oKm"), oPor: $("#oPorabaEv"), oDoma: $("#oDoma"), oSonce: $("#oSonce"),
+  prihranek: $("#evPrihranek"), note: $("#evNote"), bar: $("#barSun"),
+  kwh: $("#evKwh"), strosek: $("#evStrosek"), na100: $("#evNa100"), ref: $("#evRef")
+};
+function calcEv() {
+  const km = +evEls.km.value, por = +evEls.por.value;
+  const domaD = +evEls.doma.value / 100, sonceD = +evEls.sonce.value / 100;
+  const skupaj = km / 100 * por;
+  const domaKwh = skupaj * domaD, javnaKwh = skupaj - domaKwh;
+  const sonceKwh = domaKwh * sonceD, omrezjeKwh = domaKwh - sonceKwh;
+  const strosek = sonceKwh * EV.sonce + omrezjeKwh * EV.doma + javnaKwh * EV.javna;
+  const ref = cmp === "bencin" ? km / 100 * EV.bencinL * EV.cenaL : skupaj * EV.javna;
+
+  evEls.oKm.textContent = nf(km) + " km";
+  evEls.oPor.textContent = nf(por, 1) + " kWh/100 km";
+  evEls.oDoma.textContent = Math.round(domaD * 100) + " %";
+  evEls.oSonce.textContent = Math.round(sonceD * 100) + " %";
+  evEls.prihranek.textContent = nf(Math.round(ref - strosek)) + " €";
+  evEls.note.textContent = cmp === "bencin"
+    ? "V primerjavi z bencinskim vozilom (7,0 l/100 km, 1,55 €/l)"
+    : "V primerjavi s polnjenjem izključno na javnih polnilnicah (0,42 €/kWh)";
+  evEls.bar.style.width = (skupaj ? sonceKwh / skupaj * 100 : 0) + "%";
+  evEls.kwh.textContent = nf(Math.round(skupaj)) + " kWh";
+  evEls.strosek.textContent = nf(Math.round(strosek)) + " €";
+  evEls.na100.textContent = nf(km ? strosek / (km / 100) : 0, 1) + " €";
+  evEls.ref.textContent = nf(Math.round(ref)) + " €";
+}
+[evEls.km, evEls.por, evEls.doma, evEls.sonce].forEach(el => el.addEventListener("input", calcEv));
+$$("[data-cmp]").forEach(chip => chip.addEventListener("click", () => {
+  $$("[data-cmp]").forEach(c => c.setAttribute("aria-pressed", "false"));
+  chip.setAttribute("aria-pressed", "true");
+  cmp = chip.dataset.cmp; calcEv();
+}));
+calcEv();
+
+/* ---------------- obrazec ---------------- */
+const form = $("#kontaktForm"), note = $("#formNote");
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  const ime = $("#fIme").value.trim(), tel = $("#fTel").value.trim(), mail = $("#fMail").value.trim();
+  if (!ime || !tel || !mail || !$("#fSoglasje").checked) {
+    note.textContent = "Prosimo, izpolnite ime, telefon, e-pošto in potrdite soglasje.";
+    note.style.color = "var(--ember)";
+    return;
+  }
+  const body = [
+    `Ime: ${ime}`, `Telefon: ${tel}`, `E-pošta: ${mail}`,
+    `Zanima me: ${$("#fStoritev").value}`, `Vrsta objekta: ${$("#fObjekt").value}`,
+    "", $("#fSporocilo").value.trim()
+  ].join("\n");
+  location.href = `mailto:info@sontro.si?subject=${encodeURIComponent("Povpraševanje — " + $("#fStoritev").value)}&body=${encodeURIComponent(body)}`;
+  note.textContent = "Odpiramo vaš e-poštni program. Če se ne odpre, nam pišite na info@sontro.si.";
+  note.style.color = "var(--volt)";
+});
+})();
+</script>
+</body>
+</html>

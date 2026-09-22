@@ -6,6 +6,7 @@ Static sites, one folder per site. Every site is self-contained — open its
 | Site | Folder | Description |
 |---|---|---|
 | PGD Ostrožno | [`pgd-ostrozno/`](pgd-ostrozno/) | Prostovoljno gasilsko društvo Ostrožno, Celje |
+| Sontro | [`sontro/`](sontro/) | Sontro d.o.o., Braslovče — sončne elektrarne in električne polnilnice |
 
 ## Publishing
 
